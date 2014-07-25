@@ -15,17 +15,26 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
-	<title>Next Gen Ready</title>
-	@include('includes.head')
+	<title>Teacher Dashboard</title>
+	@include('teachers.includes.head')
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
-	<body class="login">
+	<body class="page-boxed page-header-fixed">
 		<!-- HEADER -->
-			@include('includes.header')
+			@include('teachers.includes.header')
 		<!-- BEGIN CONTAINER -->
-			@yield('content')
-			@include('includes.footer')
-			@include('includes.scripts')
+		<div class="page-container">
+			@include('teachers.includes.sidenav')
+
+			<div class="page-content-wrapper">
+				@yield('teachers.content')
+			</div>
+		</div>
+		<!--FOOTER -->
+		<div class="footer">
+			@include('teachers.includes.footer')
+		</div>
+			@include('teachers.includes.scripts')
 	</body>	
 </html>

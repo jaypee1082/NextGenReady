@@ -1,8 +1,5 @@
-	<div class="footer-inner">
-		 2014 &copy; Metronic by keenthemes.
-	</div>
-	<div class="footer-tools">
-		<span class="go-top">
-			<i class="fa fa-angle-up"></i>
-		</span>
-	</div>
+<!-- BEGIN COPYRIGHT -->
+<div class="copyright">
+	 2014 &copy; Metronic - Admin Dashboard Template.
+</div>
+<!-- END COPYRIGHT -->

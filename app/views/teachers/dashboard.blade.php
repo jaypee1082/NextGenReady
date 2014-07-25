@@ -1,5 +1,5 @@
-@extends('layouts.default')
-@section('content')
+@extends('teachers.layouts.default')
+@section('teachers.content')
 <!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content">

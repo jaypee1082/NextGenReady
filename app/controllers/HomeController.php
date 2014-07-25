@@ -22,8 +22,7 @@ class HomeController extends BaseController {
 
 	public function getIndex()
 	{
-		return View::make('teachers.teacher');
-
+		return View::make('pages.login');
 	}
 
 }
