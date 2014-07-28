@@ -463,7 +463,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="login.html">
+						<a href="{{ URL::route('users.logout') }}">
 							<i class="fa fa-key"></i> Log Out
 						</a>
 					</li>

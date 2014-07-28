@@ -250,10 +250,10 @@ var Login = function () {
             handleRegister();        
 	       
 	       	$.backstretch([
-		        "assets/img/bg/1.jpg",
-		        "assets/img/bg/2.jpg",
-		        "assets/img/bg/3.jpg",
-		        "assets/img/bg/4.jpg"
+		        "assets/img/bg/slide1.jpg",
+		        "assets/img/bg/slide2.jpg",
+		        "assets/img/bg/slide3.jpg"
+		        //"assets/img/bg/slide4.jpg"
 		        ], {
 		          fade: 1000,
 		          duration: 8000

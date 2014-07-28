@@ -1,7 +1,7 @@
 <!-- BEGIN LOGO -->
 <div class="logo">
 	<a href="{{ URL::route('home') }}">
-		<img src="assets/img/logo2.png" alt=""/>
+		<img class="login-logo" src="assets/img/logo3.png" alt=""/>
 	</a>
 </div>
 <!-- END LOGO -->

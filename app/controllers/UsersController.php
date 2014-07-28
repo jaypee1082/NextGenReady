@@ -93,7 +93,28 @@ class UsersController extends BaseController {
 
 		if(Auth::attempt($data)) 
 		{
-			echo 'YES CORRECT PASSWORD';
+
+			$user = User::getUserInfo(Auth::user()->id)->first();
+
+			$role = $user->role->role_name;
+
+			if($role == 'Administrator')
+			{
+				return Redirect::route('admin.index');
+			} 
+			else if($role == 'Teacher')
+			{
+				return Redirect::route('teacher.index');
+			}
+			else if($role == 'Student')
+			{
+				return Redirect::route('student.index');
+			}
+			else
+			{
+				return Redirect::route('parent.index');
+			}
+
 		}
 		else 
 		{

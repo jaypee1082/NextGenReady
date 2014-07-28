@@ -22,5 +22,8 @@
 <link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 {{ HTML::style('assets/css/pages/login-soft.css') }}
 {{ HTML::style('assets/css/custom.css') }}
+
+<!-- nextgenready styling -->
+{{ HTML::style('assets/css/nexgenready.css') }}
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>

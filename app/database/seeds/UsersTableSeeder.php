@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder {
 				'role_id' => 1,
 				'first_name' => 'Raina',
 				'last_name' => 'Gamboa',
-				'gender' => 'Male',
+				'gender' => 'Female',
 				'created_at' => new DateTime,
 				'updated_at' => new DateTime
 			),
