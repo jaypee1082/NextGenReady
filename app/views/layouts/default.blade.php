@@ -15,7 +15,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
-	<title>Next Gen Ready</title>
+	<title>{{ $title }}</title>
 	@include('includes.head')
 </head>
 <!-- END HEAD -->

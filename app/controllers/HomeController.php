@@ -15,14 +15,15 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
+/*	public function showWelcome()
 	{
 		return View::make('hello');
-	}
+	}*/
 
 	public function getIndex()
 	{
-		return View::make('pages.login');
+		return View::make('users.login')
+			->with('title', 'NexGenReady');
 	}
 
 }

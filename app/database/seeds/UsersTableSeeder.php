@@ -12,31 +12,45 @@ class UsersTableSeeder extends Seeder {
 		
 		$users = array(
 			array(
-				'username' => 'Xcrasher',
+				'username' => 'admin',
 				'password' => Hash::make ('1234aA'),
+				'role_id' => 1,
+				'first_name' => 'Raina',
+				'last_name' => 'Gamboa',
+				'gender' => 'Male',
+				'created_at' => new DateTime,
+				'updated_at' => new DateTime
+			),
+			
+			array(
+				'username' => 'teacher',
+				'password' => Hash::make ('1234aA'),
+				'role_id' => 2,
+				'first_name' => 'Marvin Jayson',
+				'last_name' => 'Baga',
+				'gender' => 'Male',
+				'created_at' => new DateTime,
+				'updated_at' => new DateTime
+			),
+
+			array(
+				'username' => 'student',
+				'password' => Hash::make ('1234aA'),
+				'role_id' => 3,
 				'first_name' => 'Jaypee',
 				'last_name' => 'Onza',
-				'gender' => 'M',
+				'gender' => 'Male',
 				'created_at' => new DateTime,
 				'updated_at' => new DateTime
 			),
-			
+
 			array(
-				'username' => 'Calmir',
+				'username' => 'parent',
 				'password' => Hash::make ('1234aA'),
+				'role_id' => 4,
 				'first_name' => 'Erickson',
 				'last_name' => 'Tudla',
-				'gender' => 'M',
-				'created_at' => new DateTime,
-				'updated_at' => new DateTime
-			),
-			
-			array(
-				'username' => 'Mavka',
-				'password' => Hash::make ('1234aA'),
-				'first_name' => 'Michelle',
-				'last_name' => 'Yang',
-				'gender' => 'F',
+				'gender' => 'Male',
 				'created_at' => new DateTime,
 				'updated_at' => new DateTime
 			)

@@ -1,20 +1,21 @@
 <?php
 
-class TeacherController extends BaseController {
+class ModulesController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.
+	 * GET /modules
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		return View::make('teachers.dashboard');
+		//
 	}
-
 
 	/**
 	 * Show the form for creating a new resource.
+	 * GET /modules/create
 	 *
 	 * @return Response
 	 */
@@ -23,9 +24,9 @@ class TeacherController extends BaseController {
 		//
 	}
 
-
 	/**
 	 * Store a newly created resource in storage.
+	 * POST /modules
 	 *
 	 * @return Response
 	 */
@@ -34,9 +35,9 @@ class TeacherController extends BaseController {
 		//
 	}
 
-
 	/**
 	 * Display the specified resource.
+	 * GET /modules/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -46,9 +47,9 @@ class TeacherController extends BaseController {
 		//
 	}
 
-
 	/**
 	 * Show the form for editing the specified resource.
+	 * GET /modules/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -58,9 +59,9 @@ class TeacherController extends BaseController {
 		//
 	}
 
-
 	/**
 	 * Update the specified resource in storage.
+	 * PUT /modules/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -70,9 +71,9 @@ class TeacherController extends BaseController {
 		//
 	}
 
-
 	/**
 	 * Remove the specified resource from storage.
+	 * DELETE /modules/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -81,6 +82,5 @@ class TeacherController extends BaseController {
 	{
 		//
 	}
-
 
 }

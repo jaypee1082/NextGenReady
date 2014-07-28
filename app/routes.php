@@ -11,11 +11,28 @@
 |
 */
 
-/*Route::get('/', function()
-{
-	return View::make('hello');
-});*/
-
+/*-------------------------------------------------*/
+/*----------------- Login Routes ------------------*/
+/*-------------------------------------------------*/
 Route::get('/', array('as' => 'home', 'uses' => 'HomeController@getIndex'));
 
-Route::resource('teachers', 'TeacherController');
+/*-------------------------------------------------*/
+/*---------------- User Routes -----------------*/
+/*-------------------------------------------------*/
+Route::resource('users', 'UsersController');
+Route::post('users/login/attempt', array('as' => 'users.login.attempt', 'uses' => 'UsersController@userLoginAttempt'));
+
+Route::get('logout',  array('as' => 'users.logout', function() {
+    Auth::logout();
+    return Redirect::to('/');
+}));
+
+/*-------------------------------------------------*/
+/*---------------- Teacher Routes -----------------*/
+/*-------------------------------------------------*/
+Route::resource('teachers', 'TeachersController');
+
+/*-------------------------------------------------*/
+/*----------------- Admin Routes ------------------*/
+/*-------------------------------------------------*/
+Route::resource('admin', 'AdminController');

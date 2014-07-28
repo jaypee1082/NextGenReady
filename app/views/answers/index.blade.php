@@ -1,0 +1,1 @@
+D:\xampp\htdocs\NextGenReady\app/views/answers/index.blade.php
