@@ -84,4 +84,80 @@ class AdminController extends BaseController {
 		//
 	}
 
+	public function getUsersList()
+	{
+		$users = User::all();
+
+		return View::make('admin.users.index')
+			->with('users', $users)
+			->with('title', 'Admin - List of Users');
+	}
+
+	public function getModulesList()
+	{
+		$users = User::all();
+
+		return View::make('admin.users.index')
+			->with('users', $users)
+			->with('title', 'Admin - List of Users');
+	}
+
+	public function getQuestionsList()
+	{
+		$users = User::all();
+
+		return View::make('admin.users.index')
+			->with('users', $users)
+			->with('title', 'Admin - List of Users');
+	}
+
+	public function getExercisesList()
+	{
+		$users = User::all();
+
+		return View::make('admin.users.index')
+			->with('users', $users)
+			->with('title', 'Admin - List of Users');
+	}
+
+	public function createUser()
+	{
+		$roles = Role::all();
+
+		return View::make('admin.users.create')
+			->with('roles', $roles)
+			->with('title', 'Create User');
+	}
+
+	public function storeUser()
+	{
+		$input = Input::all();
+		$rules = array(
+					'username' => 'required|min:3|unique:users',
+					'password' => 'required|min:6',
+					'confirm_password' => 'required|same:password',
+					);
+
+		$validation = Validator::make($input, $rules);
+		if($validation->fails()) 
+		{
+			return Redirect::back()->withErrors($validation)->withInput();
+		}
+		else 
+		{
+			$data = array(
+				'username' => Input::get('username'),
+				'password' => Input::get('password'),
+				'role_id' => Input::get('role_id'),
+				'first_name' => Input::get('first_name'),
+				'last_name' => Input::get('last_name'),
+				'gender' => Input::get('gender'),
+				);
+			
+			$user = User::adminStoreUser($data);
+			return Redirect::route('admin.users.create')
+				->with('message', 'Successfully Added New User!');
+		}
+	}
+
 }

@@ -1,1 +1,0 @@
-D:\xampp\htdocs\NextGenReady\app/views/group_modules/show.blade.php

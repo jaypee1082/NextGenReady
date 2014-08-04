@@ -13,7 +13,7 @@ Page header
 .header {
   filter: none !important;
   background-image: none !important;
-  background-color: #0f4e74 !important;
+  background-color: #073A91 !important;
 }
 .header .btn-navbar {
   background-color: #0f4e74 !important;
@@ -297,7 +297,7 @@ Gritter Notifications
 /* begin: boxed page */
 @media (min-width: 992px) {
   .page-boxed {
-    background-color: #125e8b !important;
+    background-color: #073A91 !important;
   }
   .page-boxed .page-container {
     background-color: #1570a6;

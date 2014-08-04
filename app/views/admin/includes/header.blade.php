@@ -3,13 +3,13 @@
 	<!-- BEGIN TOP NAVIGATION BAR -->
 	<div class="header-inner">
 		<!-- BEGIN LOGO -->
-		<a class="navbar-brand" href="index.html">
-			<img src="assets/img/logo.png" alt="logo" class="img-responsive"/>
+		<a class="navbar-brand" href="{{ URL::route('admin.index') }}">
+			<img src="{{ URL::asset('assets/img/logo2.png') }}" alt="logo" class="img-responsive" width="110px"/>
 		</a>
 		<!-- END LOGO -->
 		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
 		<a href="javascript:;" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-			<img src="assets/img/menu-toggler.png" alt=""/>
+			<img src="{{ URL::asset('assets/img/menu-toggler.png') }} " alt=""/>
 		</a>
 		<!-- END RESPONSIVE MENU TOGGLER -->
 		<!-- BEGIN TOP NAVIGATION MENU -->
@@ -158,7 +158,7 @@
 							<li>
 								<a href="inbox.html?a=view">
 									<span class="photo">
-										<img src="./assets/img/avatar2.jpg" alt=""/>
+										<img src="{{ URL::asset('assets/img/avatar2.jpg') }}" alt=""/>
 									</span>
 									<span class="subject">
 										<span class="from">
@@ -176,7 +176,7 @@
 							<li>
 								<a href="inbox.html?a=view">
 									<span class="photo">
-										<img src="./assets/img/avatar3.jpg" alt=""/>
+										<img src="{{ URL::asset('assets/img/avatar3.jpg') }}" alt=""/>
 									</span>
 									<span class="subject">
 										<span class="from">
@@ -194,7 +194,7 @@
 							<li>
 								<a href="inbox.html?a=view">
 									<span class="photo">
-										<img src="./assets/img/avatar1.jpg" alt=""/>
+										<img src="{{ URL::asset('assets/img/avatar1.jpg') }}" alt=""/>
 									</span>
 									<span class="subject">
 										<span class="from">
@@ -212,7 +212,7 @@
 							<li>
 								<a href="inbox.html?a=view">
 									<span class="photo">
-										<img src="./assets/img/avatar2.jpg" alt=""/>
+										<img src="{{ URL::asset('assets/img/avatar2.jpg') }}" alt=""/>
 									</span>
 									<span class="subject">
 										<span class="from">
@@ -230,7 +230,7 @@
 							<li>
 								<a href="inbox.html?a=view">
 									<span class="photo">
-										<img src="./assets/img/avatar3.jpg" alt=""/>
+										<img src="{{ URL::asset('assets/img/avatar3.jpg') }}" alt=""/>
 									</span>
 									<span class="subject">
 										<span class="from">
@@ -417,9 +417,11 @@
 			<!-- BEGIN USER LOGIN DROPDOWN -->
 			<li class="dropdown user">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-					<img alt="" src="assets/img/avatar1_small.jpg"/>
+					<img alt="" src="{{ URL::asset('assets/img/avatar1_small.jpg') }}"/>
 					<span class="username">
-						 Bob Nilson
+						@if(Auth::check())
+							{{ Auth::user()->first_name . ' ' . Auth::user()->last_name;; }}
+						@endif
 					</span>
 					<i class="fa fa-angle-down"></i>
 				</a>
@@ -427,27 +429,6 @@
 					<li>
 						<a href="extra_profile.html">
 							<i class="fa fa-user"></i> My Profile
-						</a>
-					</li>
-					<li>
-						<a href="page_calendar.html">
-							<i class="fa fa-calendar"></i> My Calendar
-						</a>
-					</li>
-					<li>
-						<a href="inbox.html">
-							<i class="fa fa-envelope"></i> My Inbox
-							<span class="badge badge-danger">
-								 3
-							</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<i class="fa fa-tasks"></i> My Tasks
-							<span class="badge badge-success">
-								 7
-							</span>
 						</a>
 					</li>
 					<li class="divider">

@@ -1,1 +1,0 @@
-D:\xampp\htdocs\NextGenReady\app/views/question_types/edit.blade.php

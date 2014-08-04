@@ -15,6 +15,7 @@
 {{ HTML::script('assets/plugins/jquery.cokie.min.js') }}
 {{ HTML::script('assets/plugins/uniform/jquery.uniform.min.js') }}
 <!-- END CORE PLUGINS -->
+
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 {{ HTML::script('assets/plugins/jqvmap/jqvmap/jquery.vmap.js') }}
 {{ HTML::script('assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js') }}
@@ -30,17 +31,37 @@
 {{ HTML::script('assets/plugins/bootstrap-daterangepicker/moment.min.js') }}
 {{ HTML::script('assets/plugins/bootstrap-daterangepicker/daterangepicker.js') }}
 {{ HTML::script('assets/plugins/gritter/js/jquery.gritter.js') }}
+
 <!-- IMPORTANT! fullcalendar depends on jquery-ui-1.10.3.custom.min.js for drag & drop support -->
 {{ HTML::script('assets/plugins/fullcalendar/fullcalendar/fullcalendar.min.js') }}
 {{ HTML::script('assets/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.js') }}
 {{ HTML::script('assets/plugins/jquery.sparkline.min.js') }}
 <!-- END PAGE LEVEL PLUGINS -->
+
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 {{ HTML::script('assets/scripts/core/app.js') }}
 {{ HTML::script('assets/scripts/custom/index.js') }}
 {{ HTML::script('assets/scripts/custom/tasks.js') }}
+
+<!-- TABLE LAYOUTS FOR ADMIN -->
+{{ HTML::script('assets/plugins/select2/select2.min.js') }}
+{{ HTML::script('assets/plugins/data-tables/jquery.dataTables.js') }}
+{{ HTML::script('assets/plugins/data-tables/DT_bootstrap.js') }}
 <!-- END PAGE LEVEL SCRIPTS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+{{ HTML::script('assets/scripts/core/app.js') }}
+{{ HTML::script('assets/scripts/custom/table-managed.js') }}
+
+
 <script>
+jQuery(document).ready(function() {       
+   App.init();
+   TableManaged.init();
+});
+</script>
+
+<!--<script>
 jQuery(document).ready(function() {    
    App.init(); // initlayout and core plugins
    Index.init();
@@ -53,5 +74,5 @@ jQuery(document).ready(function() {
    Index.initIntro();
    Tasks.initDashboardWidget();
 });
-</script>
-<!-- END JAVASCRIPTS -->
+</script>-->
+

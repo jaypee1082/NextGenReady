@@ -1,4 +1,5 @@
 <!-- BEGIN SIDEBAR -->
+
 	<div class="page-sidebar-wrapper">
 		<div class="page-sidebar navbar-collapse collapse">
 			<!-- add "navbar-no-scroll" class to disable the scrolling of the sidebar menu -->
@@ -24,7 +25,7 @@
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
-				<li class="start active ">
+				<li class="start">
 					<a href="{{ URL::route('admin.index') }}">
 						<i class="fa fa-home"></i>
 						<span class="title">
@@ -45,13 +46,13 @@
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="#">
+							<a href="{{ URL::route('admin.users') }}">
 								<i class="fa fa-list"></i>
 								View list
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="{{ URL::route('admin.users.create') }}">
 								<i class="fa fa-plus"></i>
 								Add new user
 							</a>
@@ -69,7 +70,7 @@
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="#">
+							<a href="{{ URL::route('admin.modules') }}">
 								<i class="fa fa-list"></i>
 								View list
 							</a>
@@ -93,7 +94,7 @@
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="#">
+							<a href="{{ URL::route('admin.questions') }}">
 								<i class="fa fa-list"></i>
 								View list
 							</a>
@@ -117,7 +118,7 @@
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="#">
+							<a href="{{ URL::route('admin.exercises') }}">
 								<i class="fa fa-list"></i>
 								View list
 							</a>

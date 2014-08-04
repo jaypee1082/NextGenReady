@@ -34,13 +34,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->hasOne('Role', 'id', 'role_id');
 	}
 
-	public static function getUserInfo($id)
+	public static function adminStoreUser($data) 
 	{
-		return User::with('role')
-		 	->where('id', $id);
+		$user = new User;
+		$user->username = $data['username'];
+		$user->password = Hash::make($data['password']);
+		$user->role_id = $data['role_id'];
+		$user->first_name = $data['first_name'];
+		$user->last_name = $data['last_name'];
+		$user->gender = $data['gender'];
+		$user->save();
 
-
+		return User::find($user->id);
 	}
-
-
 }

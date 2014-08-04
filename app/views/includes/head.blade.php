@@ -26,4 +26,4 @@
 <!-- nextgenready styling -->
 {{ HTML::style('assets/css/nexgenready.css') }}
 <!-- END THEME STYLES -->
-<link rel="shortcut icon" href="favicon.ico"/>
+<link rel="shortcut icon" href="assets/favicon.ico"/>

@@ -15,7 +15,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
-	<title>NexGenReady - {{ $title }}</title>
+	<title>NexGenReady | {{ $title }}</title>
 	@include('admin.includes.head')
 </head>
 <!-- END HEAD -->
@@ -28,7 +28,9 @@ License: You must have a valid license purchased only from themeforest(the above
 			@include('admin.includes.sidenav')
 
 			<div class="page-content-wrapper">
-				@yield('admin.content')
+				<div class="page-content">
+					@yield('admin.content')
+				</div>
 			</div>
 		</div>
 		<!--FOOTER -->

@@ -92,29 +92,27 @@ class UsersController extends BaseController {
 		);
 
 		if(Auth::attempt($data)) 
-		{
-
-			$user = User::getUserInfo(Auth::user()->id)->first();
-
-			$role = $user->role->role_name;
-
-			if($role == 'Administrator')
+		{		
+			if(Auth::user()->role_id == '1')
 			{
-				return Redirect::route('admin.index');
-			} 
-			else if($role == 'Teacher')
-			{
-				return Redirect::route('teacher.index');
+				return Redirect::route('admin.index', Auth::user()->id);
 			}
-			else if($role == 'Student')
+			else if(Auth::user()->role_id == '2')
 			{
-				return Redirect::route('student.index');
+				return Redirect::route('teachers.index', Auth::user()->id);	
+			}	
+			else if(Auth::user()->role_id == '3')
+			{
+				//return Redirect::route('students.index', Auth::user()->id);
+			}
+			else if(Auth::user()->role_id == '4')
+			{
+				//return Redirect::route('parents.index', Auth::user()->id);
 			}
 			else
 			{
-				return Redirect::route('parent.index');
+				Auth::logout();
 			}
-
 		}
 		else 
 		{

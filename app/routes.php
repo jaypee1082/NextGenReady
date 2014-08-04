@@ -27,13 +27,6 @@ Route::get('logout',  array('as' => 'users.logout', function() {
 
 /*
 |-------------------------------------------------
-|Administrator User Routes
-|-------------------------------------------------
-*/
-Route::resource('admin', 'AdminController');
-
-/*
-|-------------------------------------------------
 |Teacher User Routes
 |-------------------------------------------------
 */
@@ -45,6 +38,19 @@ Route::resource('teachers', 'TeachersController');
 |-------------------------------------------------
 */
 Route::resource('users', 'UsersController');
+
+/*
+|-------------------------------------------------
+|Administrator User Routes
+|-------------------------------------------------
+*/
+Route::resource('admin', 'AdminController');
+Route::get('admin/users/list', array('as' => 'admin.users', 'uses' => 'AdminController@getUsersList'));
+Route::get('admin/users/create', array('as' => 'admin.users.create', 'uses' => 'AdminController@createUser'));
+Route::post('admin/users', array('as' => 'admin.users.store', 'uses' => 'AdminController@storeUser'));
+Route::get('admin/moduless/list', array('as' => 'admin.modules', 'uses' => 'AdminController@getModulesList'));
+Route::get('admin/questions/list', array('as' => 'admin.questions', 'uses' => 'AdminController@getQuestionsList'));
+Route::get('admin/exercises/list', array('as' => 'admin.exercises', 'uses' => 'AdminController@getExercisessList'));
 
 /*
 |-------------------------------------------------
