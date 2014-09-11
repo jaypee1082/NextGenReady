@@ -47,4 +47,22 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 		return User::find($user->id);
 	}
+
+	public static function adminUpdateUser($id, $data) 
+	{
+		$user = User::find($id);
+		$user->username = $data['username'];
+		$user->role_id = $data['role_id'];
+		$user->first_name = $data['first_name'];
+		$user->last_name = $data['last_name'];
+		$user->gender = $data['gender'];
+		$user->push();
+	}
+
+	public static function updateUserPassword($id, $data) 
+	{
+		$user = User::find($id);
+		$user->password = Hash::make($data['password']);
+		$user->push();
+	}
 }

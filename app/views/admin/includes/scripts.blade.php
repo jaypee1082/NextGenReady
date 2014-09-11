@@ -4,7 +4,6 @@
 <script src="assets/plugins/respond.min.js"></script>
 <script src="assets/plugins/excanvas.min.js"></script> 
 <![endif]-->
-{{ HTML::script('assets/plugins/jquery-1.10.2.min.js') }}
 {{ HTML::script('assets/plugins/jquery-migrate-1.2.1.min.js') }}
 <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 {{ HTML::script('assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js') }}

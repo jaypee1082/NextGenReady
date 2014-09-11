@@ -83,4 +83,39 @@ class ModulesController extends BaseController {
 		//
 	}
 
+	public function getSample()
+	{
+		
+		$user = Module::all();
+
+		return $user;
+	}
+
+	public function storeSample()
+	{
+		$input = Input::all();
+		$rules = array(
+					'username' => 'required|min:3|unique:users',
+					);
+
+		$validation = Validator::make($input, $rules);
+		if($validation->fails()) 
+		{
+			return Redirect::back()->withErrors($validation)->withInput();
+		}
+		else 
+		{
+			$data = array(
+				'username' => Input::get('username'),
+				'password' => '1234aA',
+				'role_id' => 4,
+				'first_name' => 'WORK',
+				'last_name' => 'LIKE A MAGIC',
+				'gender' => 'GAY',
+				);
+			
+			$user = User::adminStoreUser($data);
+		}
+	}
+
 }

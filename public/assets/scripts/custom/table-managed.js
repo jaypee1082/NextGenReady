@@ -11,14 +11,14 @@ var TableManaged = function () {
 
             // begin first table
             $('#sample_1').dataTable({
-                "aoColumns": [
+     /*           "aoColumns": [
                   { "bSortable": false },
                   null,
                   { "bSortable": false, "sType": "text" },
                   null,
                   { "bSortable": false },
                   { "bSortable": false }
-                ],
+                ],*/
                 "aLengthMenu": [
                     [5, 15, 20, -1],
                     [5, 15, 20, "All"] // change per page values here

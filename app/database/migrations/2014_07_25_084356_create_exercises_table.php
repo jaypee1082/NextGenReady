@@ -18,7 +18,7 @@ class CreateExercisesTable extends Migration {
 			$table->string('exercise_slug');
 			$table->integer('module_id');
 			$table->string('title');
-			$table->boolean('type');
+			$table->integer('type');
 			$table->string('shortcode');
 			$table->string('screenshot');
 			$table->timestamps();

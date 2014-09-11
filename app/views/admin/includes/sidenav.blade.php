@@ -76,14 +76,14 @@
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="{{ URL::route('admin.modules.create') }}">
 								<i class="fa fa-plus"></i>
 								Add new module
 							</a>
 						</li>
 					</ul>
 				</li>
-				<li>
+				<!--<li>
 					<a href="javascript:;">
 						<i class="fa fa-question-circle"></i>
 						<span class="title">
@@ -106,7 +106,7 @@
 							</a>
 						</li>
 					</ul>
-				</li>
+				</li>-->
 				<li>
 					<a href="javascript:;">
 						<i class="fa fa-list-alt"></i>

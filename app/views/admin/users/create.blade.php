@@ -47,7 +47,7 @@
 			{{ Form::open(array('route' => 'admin.users.store', 'method' => 'POST', 'class' => 'form-horizontal form-bordered form-row-stripped')) }}
 				<div class="form-body">
 					<div class="form-group">
-						<label class="control-label col-md-3">Username<span style="color: red;">*</span></label>
+						<label class="control-label col-md-3">Username <span style="color: red;">*</span></label>
 						<div class="col-md-9">
 							 {{ Form::text('username','', array('placeholder' => 'Username', 'class' => 'form-control')) }}
 							 <span class="help-block">
@@ -58,7 +58,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Password<span style="color: red;">*</span></label>
+						<label class="control-label col-md-3">Password <span style="color: red;">*</span></label>
 						<div class="col-md-9">
 							{{ Form::password('password', array('placeholder' => 'Password', 'class' => 'form-control')) }}
 							<span class="help-block">
@@ -69,7 +69,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Confirm Password<span style="color: red;">*</span></label>
+						<label class="control-label col-md-3">Confirm Password <span style="color: red;">*</span></label>
 						<div class="col-md-9">
 							{{ Form::password('confirm_password', array('placeholder' => 'Confirm Password', 'class' => 'form-control')) }}
 							<span class="help-block">

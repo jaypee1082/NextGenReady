@@ -30,7 +30,7 @@
 			Managed Users <small>managed user informations</small>
 			</h3>
 			<ul class="page-breadcrumb breadcrumb">
-				<li class="btn-group">
+				<!--<li class="btn-group">
 					<button type="button" class="btn blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
 					<span>
 						Actions
@@ -59,9 +59,9 @@
 							<a href="#">
 								Separated link
 							</a>
-						</li>-->
+						</li>
 					</ul>
-				</li>
+				</li>-->
 				<li>
 					<i class="fa fa-home"></i>
 					<a href="{{ URL::route('admin.index') }}">
@@ -101,83 +101,136 @@
 					</div>
 				</div>
 				<div class="portlet-body">
-					<div class="table-toolbar">
-						<div class="btn-group">
-							<a href="{{ URL::route('admin.users.create') }}" id="sample_editable_1_new" class="btn green">
-							Add New <i class="fa fa-plus"></i>
-							</a>
-						</div>
-						<div class="btn-group pull-right">
-							<button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
-							</button>
-							<ul class="dropdown-menu pull-right">
-								<li>
-									<a href="#">
-										 Print
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										 Save as PDF
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<table class="table table-striped table-bordered table-hover" id="sample_1">
-						<thead>
-							<tr>
-								<th class="table-checkbox">
-									<input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes"/>
-								</th>
-								<th>
-									 Username
-								</th>
-								<th>
-									 Fullname
-								</th>
-								<th>
-									 Role
-								</th>
-								<th>
-									 Joined
-								</th>
-								<th>
-									 Action
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($users as $user)
-								<tr class="odd gradeX">
-									<td>
-										<input type="checkbox" class="checkboxes" value="1"/>
-									</td>
-									<td>
-										{{ $user->username }}
-									</td>
-									<td>
-										{{ $user->first_name . ' ' . $user->last_name }}
-									</td>
-									<td class="center">
-										{{ $user->role->role_name }}
-									</td>
-									<td>
-										{{ date('M d, Y', strtotime($user->created_at)) }}
-									</td>
-									<td>
-										<a class="edit" href="javascript:;">
-											 Edit
-										</a> 
-										|
-										<a class="delete" href="javascript:;">
-											 Delete
+					<form action="{{ URL::route('admin.users.multiple.destroy') }}" method="post" id="user_table_form">
+						<div class="table-toolbar">
+							<div class="btn-group">
+								<a href="{{ URL::route('admin.users.create') }}" id="sample_editable_1_new" class="btn green">
+								Add New <i class="fa fa-plus"></i>
+								</a>
+							</div>
+							<div class="btn-group pull-right">
+								<button type="button" class="btn blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+									<span>
+										Actions
+									</span>
+									<i class="fa fa-angle-down"></i>
+								</button>
+								<ul class="dropdown-menu pull-right" role="menu">
+									<li>
+										<a href="#">
+											Activate
 										</a>
-									</td>
+									</li>
+									<li>
+										<a href="#">
+											Deactivate
+										</a>
+									</li>
+									<li>
+										<a href="#" id="delete_users">
+											Delete
+										</a>
+									</li>
+									<!--<li class="divider">
+									</li>
+									<li>
+										<a href="#">
+											Separated link
+										</a>
+									</li>-->
+								</ul>
+							</div>
+							<!--<div class="btn-group pull-right">
+								<button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
+								</button>
+								<ul class="dropdown-menu pull-right">
+									<li>
+										<a href="#">
+											 Print
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											 Save as PDF
+										</a>
+									</li>
+								</ul>
+							</div>-->
+						</div>
+						<table class="table table-striped table-bordered table-hover" id="sample_1">
+							<thead>
+								<tr>
+									<th class="table-checkbox">
+										<input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes"/>
+									</th>
+									<th>
+										 Username
+									</th>
+									<th>
+										 Fullname
+									</th>
+									<th>
+										 Role
+									</th>
+									<th>
+										 Joined
+									</th>
+									<th>
+										 Action
+									</th>
 								</tr>
-							@endforeach
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								@foreach($users as $user)
+									<tr class="odd gradeX">
+										<td>
+											@if($user->username == 'admin')
+												{{ Form::checkbox('admin_checkbox', $user->id, false, array('disabled')) }}
+												<!--<input type="checkbox" value="{{ $user->id }}" disabled/>-->
+											@else
+												{{ Form::checkbox('user_checkboxes[]', $user->id, false, array('class' => 'checkboxes')) }}
+												<!--<input type="checkbox" class="checkboxes" name="user_checkboxes[]" value="{{ $user->id }}"/>-->
+											@endif
+										</td>
+										<td>
+											{{ $user->username }}
+										</td>
+										<td>
+											{{ $user->first_name . ' ' . $user->last_name }}
+										</td>
+										<td class="center">
+											{{ $user->role->role_name }}
+										</td>
+										<td>
+											{{ date('M d, Y', strtotime($user->created_at)) }}
+										</td>
+										<td>
+											<a class="edit" href="{{ URL::route('admin.users.edit', $user->id) }}">
+												 Edit
+											</a>
+											@if($user->username != 'admin')
+											|
+												<a class="delete" href="{{ URL::route('admin.users.destroy', $user->id) }}">
+													 Delete
+												</a>
+											@endif
+
+											
+										</td>
+									</tr>
+								@endforeach
+							</tbody>
+							<!--<input type="submit" name="submit" value="Submit" /> -->
+							<script>
+								jQuery(document).ready(function() {
+									jQuery('#delete_users').click(function(e){
+										e.preventDefault();
+										jQuery('#user_table_form').submit();
+									});
+								});
+							</script>
+						</table>
+					</form>
 				</div>
 			</div>
 			<!-- END EXAMPLE TABLE PORTLET-->

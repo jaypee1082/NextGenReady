@@ -3,7 +3,7 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="" name="description"/>
 <meta content="" name="author"/>
-
+{{ HTML::script('assets/plugins/jquery-1.10.2.min.js') }}
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 {{ HTML::style('http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all') }}
 {{ HTML::style('assets/plugins/font-awesome/css/font-awesome.min.css') }}

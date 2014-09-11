@@ -10,3 +10,6 @@
 .f-copy{
 	/*color: #083B91 !important;*/
 }
+.clear{	
+	clear: both;
+}

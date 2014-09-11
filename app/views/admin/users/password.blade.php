@@ -29,7 +29,7 @@
 	<div class="portlet box blue ">
 		<div class="portlet-title">
 			<div class="caption">
-				<i class="fa fa-reorder"></i>Editing {{ $module->module_name }}
+				<i class="fa fa-reorder"></i>Change Password
 			</div>
 			<div class="tools">
 				<a href="javascript:;" class="collapse">
@@ -44,39 +44,34 @@
 		</div>
 		<div class="portlet-body form">
 			<!-- BEGIN FORM-->
-			{{ Form::open(array('route' => array('admin.modules.update', $module->id), 'method' => 'PATCH', 'class' => 'form-horizontal form-bordered form-row-stripped')) }}
+			{{ Form::open(array('route' => array('admin.users.password.update', $user->id), 'method' => 'PATCH', 'class' => 'form-horizontal form-bordered form-row-stripped')) }}
 				<div class="form-body">
-					<div class="form-group">
-						<label class="control-label col-md-3">Module Name <span style="color: red;">*</span></label>
+					<!--<div class="form-group">
+						<label class="control-label col-md-3">Role</label>
 						<div class="col-md-9">
-							 {{ Form::text('module_name', $module->module_name, array('placeholder' => 'Module Name', 'class' => 'form-control')) }}
-							 <span class="help-block">
-							@if($errors->has())
-                           		{{ $errors->first('module_name', '<li style="color: red;">:message</li>') }}
-                           	@endif
-						</span>
+							{{ Form::text('old_password', '', array('placeholder' => 'Old Password', 'class' => 'form-control')) }}
+						</div>
+					</div>-->
+					<div class="form-group">
+						<label class="control-label col-md-3">New Password</label>
+						<div class="col-md-9">
+							{{ Form::password('password', array('placeholder' => 'New Password', 'class' => 'form-control')) }}
+							<span class="help-block">
+								@if($errors->has())
+	                           		{{ $errors->first('password', '<li style="color: red;">:message</li>') }}
+	                           	@endif
+							</span>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Module Slug <span style="color: red;">*</span></label>
+						<label class="control-label col-md-3">Confirm Password</label>
 						<div class="col-md-9">
-							{{ Form::text('module_slug', $module->module_slug, array('placeholder' => 'Module Slug', 'class' => 'form-control')) }}
+							{{ Form::password('confirm_password', array('placeholder' => 'Confirm New Password', 'class' => 'form-control')) }}
 							<span class="help-block">
-							@if($errors->has())
-                           		{{ $errors->first('module_slug', '<li style="color: red;">:message</li>') }}
-                           	@endif
-						</span>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-md-3">Description <span style="color: red;">*</span></label>
-						<div class="col-md-9">
-							{{ Form::textarea('description', $module->description, array('placeholder' => 'Please input a module description here...', 'class' => 'form-control')) }}
-							<span class="help-block">
-							@if($errors->has())
-                           		{{ $errors->first('description', '<li style="color: red;">:message</li>') }}
-                           	@endif
-						</span>
+								@if($errors->has())
+	                           		{{ $errors->first('confirm_password', '<li style="color: red;">:message</li>') }}
+	                           	@endif
+							</span>
 						</div>
 					</div>
 				</div>
@@ -84,7 +79,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="col-md-offset-3 col-md-9">
-								{{ Form::submit('Update', array('class' => 'btn green', 'name' => 'update_module')) }}
+								{{ Form::submit('Update Password', array('class' => 'btn green', 'name' => 'update_password')) }}
 							</div>
 						</div>
 					</div>
