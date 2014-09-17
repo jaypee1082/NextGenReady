@@ -286,23 +286,23 @@ class AdminController extends BaseController {
 		}
 	}
 
-	public function showModule($id)
+	public function showModule($slug)
 	{
-		$module = Module::find($id);
+		$module = Module::where('module_slug', '=', $slug)->first();
 
 		return Redirect::to('../../'. $module->module_slug . '/1.php');
 	}
 
-	public function editModule($id)
+	public function editModule($slug)
 	{
-		$module = Module::find($id);
+		$module = Module::where('module_slug', '=', $slug)->first();
 
 		return View::make('admin.modules.edit')
 			->with('title', 'Edit User')
 			->with('module', $module);
 	}
 
-	public function updateModule($id)
+	public function updateModule($slug)
 	{
 		$input = Input::all();
 
@@ -326,39 +326,49 @@ class AdminController extends BaseController {
 				'description' => Input::get('description'),
 				);
 
-			$module = Module::adminUpdateModule($id, $data);
+			$module = Module::where('module_slug', '=', $slug)->first();
 
-			return Redirect::route('admin.modules.edit', $id)
+			Module::adminUpdateModule($module->module_slug, $data);
+
+			return Redirect::route('admin.modules')
 							->with('message', 'Update Successful!');
 		}
 
 	}
 
-	public function destroyModule($id)
+	public function destroyModule($slug)
 	{
-		$module = Module::find($id)->delete();
+		$module = Module::where('module_slug', '=', $slug)->delete();
 
 		return Redirect::route('admin.modules');
 	}
 
+	public function destroyMultipleModule()
+	{	
+		$modules = (Input::get('module_checkboxes'));
+
+		if($modules)
+		{
+			foreach($modules as $module)
+			{
+				Module::destroy($module);
+		/*		echo '<pre>';
+				dd($module);
+				echo '<pre>';*/
+			}
+		}
+		return Redirect::back();
+	}
+
 	//admin questions
 
-	public function getQuestionsList($id)
+	public function getQuestionsList($slug)
 	{
-		//testing relationship
-		//$question = Question::find(1);
+		$module = Module::where('module_slug', '=', $slug)->first();
 
-		
-		//		$choices = $question->choices;
+		Session::put('module_slug', $module->module_slug);
 
-		//foreach($choices as $choice){
-			//echo $choice->choice;
-		//}
-		$module_id = Session::put('module_id', $id);
-		$module = Module::find($id);
-		$questions = Question::where('module_id', '=', $id)->get();
-
-		//$choices = $questions->choices;
+		$questions = Question::where('module_id', '=', $module->id)->get();
 
 		return View::make('admin.questions.index')
 			->with('module', $module)
@@ -366,9 +376,9 @@ class AdminController extends BaseController {
 			->with('title', 'Admin - List of Module Questions');
 	}
 
-	public function createQuestion($id)
+	public function createQuestion($slug)
 	{
-		$module = Module::find($id);
+		$module = Module::where('module_slug', '=', $slug)->first();
 		$question_types = QuestionType::all();
 
 		return View::make('admin.questions.create')
@@ -377,15 +387,17 @@ class AdminController extends BaseController {
 			->with('title', 'Create Questions');
 	}
 
-	public function storeQuestion()
+	public function storeQuestion($slug)
 	{
+		$module = Module::where('module_slug', '=', $slug)->first();
+
+/*		echo '<pre>';
+		dd($module);
+		echo '</pre>';*/
+
 		$input = Input::all();
 		$rules = array(
 					'question' => 'required|min:20',
-					'choice_1' => 'required|min:2',
-					'choice_2' => 'required|min:2',
-					'choice_3' => 'required|min:2',
-					'choice_4' => 'required|min:2',
 					'answer' => 'required|min:1',
 					);
 
@@ -396,22 +408,17 @@ class AdminController extends BaseController {
 		}
 		else 
 		{
-			$module_id = Session::put('module_id', Input::get('module_id'));
-
 			$data = array(
 				'question_type' => Input::get('question_type'),
 				'question' => Input::get('question'),
-				'module_id' => Input::get('module_id'),
-				'choice_1' => Input::get('choice_1'),
-				'choice_2' => Input::get('choice_2'),
-				'choice_3' => Input::get('choice_3'),
-				'choice_4' => Input::get('choice_4'),
+				'module_id' => $module->id,
+				'choices' => Input::get('choices'),
 				'answer' => Input::get('answer')
 				);
 			
 			
 			$question = Question::adminStoreQuestion($data);
-			return Redirect::route('admin.questions.create', Session::get('module_id'))
+			return Redirect::route('admin.questions.create', $module->module_slug)
 				->with('message', 'Successfully Added New Question.');
 		}
 	}
@@ -419,20 +426,32 @@ class AdminController extends BaseController {
 	public function editQuestion($id)
 	{
 		$question = Question::find($id);
+		$choices = Choice::where('question_id', '=', $question->id)->get();
 
-		return View::make('admin.modules.edit')
-			->with('title', 'Edit User')
-			->with('question', $question);
+	/*	foreach($choices as $choice)
+		{
+			echo '<pre>';
+			print_r($choice->choice);
+			echo '</pre>';
+		}*/
+		
+
+		return View::make('admin.questions.edit')
+			->with('question', $question)
+			->with('choices', $choices)
+			->with('title', 'Edit Question');
+			
 	}
 
 	public function updateQuestion($id)
 	{
+		Session::put('question_id', $id);
+
 		$input = Input::all();
 
 		$rules = array(
-			'module_name' => 'required|min:3',
-			'module_slug' => 'required|min:3',
-			'description' => 'required|min:20',
+			'question' => 'required|min:10',
+			'answer' => 'required|min:1',
 		);
 
 		$validation = Validator::make($input, $rules);
@@ -444,14 +463,15 @@ class AdminController extends BaseController {
 		else
 		{			
 			$data = array(
-				'module_name' => Input::get('module_name'),
-				'module_slug' => Input::get('module_slug'),
-				'description' => Input::get('description'),
+				'question' => Input::get('question'),
+				'answer' => Input::get('answer'),
+				'choices' => Input::get('choices'),
+				'choice_ids' => Input::get('choice_ids'),
 				);
+		
+			$module = Question::adminUpdateQuestion($id, $data);
 
-			$module = Module::adminUpdateModule($id, $data);
-
-			return Redirect::route('admin.modules.edit', $id)
+			return Redirect::route('admin.questions.edit', Session::get('question_id'))
 							->with('message', 'Update Successful!');
 		}
 
@@ -460,11 +480,11 @@ class AdminController extends BaseController {
 	public function destroyQuestion($id)
 	{
 
-		$module_id = Session::get('module_id');
+		$module_slug = Session::get('module_slug');
 		$question = Question::find($id)->delete();
 		$choices = Choice::deleteChoices($id);
 
-		return Redirect::route('admin.questions', $module_id);
+		return Redirect::route('admin.questions', $module_slug);
 	}
 
 	//admin exercises

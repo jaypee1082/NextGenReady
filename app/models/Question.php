@@ -28,30 +28,63 @@ class Question extends Eloquent {
 		$question->answer = $data['answer'];
 		$question->save();
 
-		$choice_1 = new Choice;
-		$choice_1->question_id = $question->id;
+		$choices = $data['choices'];
+		$ctr = 0;
+
+		foreach($choices as $choice)
+		{
+			$_choice = new Choice;
+			$_choice->question_id = $question->id;
+			$_choice->choice = $choice;
+			$_choice->order = Choice::getOrder($ctr);
+			$_choice->save();
+
+			$ctr++;
+		}
+
+		return Question::find($question->id);
+	}
+
+	public static function adminUpdateQuestion($id, $data)
+	{
+		$question = Question::find($id);
+		$question->question = $data['question'];
+		$question->answer = $data['answer'];
+		$question->push();
+		
+		/*$choice_1 = Choice::find($choice_id_1);
 		$choice_1->choice = $data['choice_1'];
-		$choice_1->order = 'A';
-		$choice_1->save();
+		$choice_1->push();
 
-		$choice_2 = new Choice;
-		$choice_2->question_id = $question->id;
+		$choice_2 = Choice::find($choice_id_2);
 		$choice_2->choice = $data['choice_2'];
-		$choice_2->order = 'B';
-		$choice_2->save();
+		$choice_2->push();
 
-		$choice_3 = new Choice;
-		$choice_3->question_id = $question->id;
+		$choice_3 = Choice::find($choice_id_3);
 		$choice_3->choice = $data['choice_3'];
-		$choice_3->order = 'C';
-		$choice_3->save();
+		$choice_3->push();
 
-		$choice_4 = new Choice;
-		$choice_4->question_id = $question->id;
+		$choice_4 = Choice::find($choice_id_4);
 		$choice_4->choice = $data['choice_4'];
-		$choice_4->order = 'D';
-		$choice_4->save();
+		$choice_4->push();*/
 
+		$choices = $data['choices'];
+		$choice_ids = $data['choice_ids'];
+
+/*		foreach($choice_ids as $choice_id)
+		{
+			echo '<pre>';
+			print_r($choice_id);
+			echo '</pre>';
+		}
+		die;*/
+
+		for($i = 0; $i < count($choices); $i++)
+		{
+			$_choice = Choice::find($choice_ids[$i]);
+			$_choice->choice = $choices[$i];
+			$_choice->push();
+		} 
 
 		return Question::find($question->id);
 	}

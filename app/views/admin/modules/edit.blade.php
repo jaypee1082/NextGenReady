@@ -44,7 +44,7 @@
 		</div>
 		<div class="portlet-body form">
 			<!-- BEGIN FORM-->
-			{{ Form::open(array('route' => array('admin.modules.update', $module->id), 'method' => 'PATCH', 'class' => 'form-horizontal form-bordered form-row-stripped')) }}
+			{{ Form::open(array('route' => array('admin.modules.update', $module->module_slug), 'method' => 'PATCH', 'class' => 'form-horizontal form-bordered form-row-stripped')) }}
 				<div class="form-body">
 					<div class="form-group">
 						<label class="control-label col-md-3">Module Name <span style="color: red;">*</span></label>

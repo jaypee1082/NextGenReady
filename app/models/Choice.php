@@ -15,4 +15,12 @@ class Choice extends Eloquent {
 
 		return $choices;
 	}
+
+	public static function getOrder($num)
+	{
+		$letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+		return $letter[$num];
+
+	}
 }

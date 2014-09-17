@@ -70,16 +70,18 @@ Route::post('admin/users/delete', array('as' => 'admin.users.multiple.destroy', 
 Route::get('admin/modules/list', array('as' => 'admin.modules', 'uses' => 'AdminController@getModulesList'));
 Route::get('admin/modules/create', array('as' => 'admin.modules.create', 'uses' => 'AdminController@createModule'));
 Route::post('admin/modules', array('as' => 'admin.modules.store', 'uses' => 'AdminController@storeModule'));
-Route::get('admin/module/{id?}/edit', array('as' => 'admin.modules.edit', 'uses' => 'AdminController@editModule'));
-Route::patch('admin/module/{id?}/update', array('as' => 'admin.modules.update', 'uses' => 'AdminController@updateModule'));
-Route::get('admin/module/{id?}/delete', array('as' => 'admin.modules.destroy', 'uses' => 'AdminController@destroyModule'));
+Route::get('admin/module/{slug?}/edit', array('as' => 'admin.modules.edit', 'uses' => 'AdminController@editModule'));
+Route::patch('admin/module/{slug?}/update', array('as' => 'admin.modules.update', 'uses' => 'AdminController@updateModule'));
+Route::get('admin/module/{slug?}/delete', array('as' => 'admin.modules.destroy', 'uses' => 'AdminController@destroyModule'));
+Route::post('admin/modules/delete', array('as' => 'admin.modules.multiple.destroy', 'uses' => 'AdminController@destroyMultipleModule'));
 
 /* -- Administrator Question Routes -- */
 
-Route::get('admin/module/questions/list/{id?}', array('as' => 'admin.questions', 'uses' => 'AdminController@getQuestionsList'));
-Route::get('admin/modules/questions/{id?}/create', array('as' => 'admin.questions.create', 'uses' => 'AdminController@createQuestion'));
-Route::post('admin/modules/questions', array('as' => 'admin.questions.store', 'uses' => 'AdminController@storeQuestion'));
+Route::get('admin/module/{slug?}/questions/list', array('as' => 'admin.questions', 'uses' => 'AdminController@getQuestionsList'));
+Route::get('admin/modules/{slug?}/questions/create', array('as' => 'admin.questions.create', 'uses' => 'AdminController@createQuestion'));
+Route::post('admin/modules/{slug?}/questions/store', array('as' => 'admin.questions.store', 'uses' => 'AdminController@storeQuestion'));
 Route::get('admin/module/question/{id?}/edit', array('as' => 'admin.questions.edit', 'uses' => 'AdminController@editQuestion'));
+Route::patch('admin/module/{id?}/update', array('as' => 'admin.questions.update', 'uses' => 'AdminController@updateQuestion'));
 Route::get('admin/module/{id?}/delete', array('as' => 'admin.questions.destroy', 'uses' => 'AdminController@destroyQuestion'));
 
 /* -- Administrator Exercise Routes -- */
@@ -89,7 +91,7 @@ Route::get('admin/exercises/list', array('as' => 'admin.exercises', 'uses' => 'A
 //Route::get('admin/module/sample', array('as' => 'admin.module.sample', 'uses' => 'ModulesController@getSample'));
 //Route::post('admin/module/store', array('as' => 'admin.module.store', 'uses' => 'ModulesController@storeSample'));
 
-Route::get('admin/module/{id?}/show', array('as' => 'admin.modules.show', 'uses' => 'AdminController@showModule'));
+Route::get('admin/module/{slug?}/show', array('as' => 'admin.modules.show', 'uses' => 'AdminController@showModule'));
 
 
 

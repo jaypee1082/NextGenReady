@@ -15,9 +15,9 @@ class Module extends Eloquent {
 		return Module::find($module->id);
 	}
 
-	public static function adminUpdateModule($id, $data) 
+	public static function adminUpdateModule($slug, $data) 
 	{
-		$module = Module::find($id);
+		$module = Module::where('module_slug', '=', $slug)->first();
 		$module->module_name = $data['module_name'];
 		$module->module_slug = $data['module_slug'];
 		$module->description = $data['description'];
