@@ -176,6 +176,9 @@
 										 Date Created
 									</th>
 									<th>
+										Exercises
+									</th>
+									<th>
 										 Questions
 									</th>
 									<th>
@@ -200,6 +203,17 @@
 										</td>
 										<td>
 											{{ date('M d, Y', strtotime($module->created_at)) }}
+										</td>
+										<td>
+											<a class="add-exercises" href="{{ URL::route('admin.exercises.create', $module->module_slug) }}">
+												 Add
+											</a>
+											|
+											<a class="view-exercises" href="{{ URL::route('admin.exercises', $module->module_slug) }}">
+												 View
+											</a>
+											<br/>
+											<span>Add exercises <br/>for this module <br/>or View the exercises <br/>that are already<br/> created</span>										
 										</td>
 										<td>
 											<a class="add-questions" href="{{ URL::route('admin.questions.create', $module->module_slug) }}">

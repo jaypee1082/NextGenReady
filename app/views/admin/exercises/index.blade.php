@@ -131,13 +131,22 @@
 									<input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes"/>
 								</th>
 								<th>
-									 Module Name
+									 Exercise Slug
 								</th>
 								<th>
-									 Module Slug
+									 Module Name	
 								</th>
 								<th>
-									 Description
+									 Title
+								</th>
+								<th>
+									 Type
+								</th>
+								<th>
+									 Shortcode
+								</th>
+								<th>
+									 Screenshot
 								</th>
 								<th>
 									 Date Created
@@ -148,19 +157,28 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($modules as $module)
+							@foreach($exercises as $exercise)
 								<tr class="odd gradeX">
 									<td>
-										<input type="checkbox" class="checkboxes" value="{{ $module->id }}"/>
+										<input type="checkbox" class="checkboxes" value="{{ $exercise->id }}"/>
 									</td>
 									<td>
-										{{ $module->module_name }}
+										{{ $exercise->exercise_slug }}
 									</td>
 									<td>
-										{{ $module->module_slug }}
+										{{ $exercise->modules->module_name }}
 									</td>
 									<td class="center" style="white-space: normal !important;">
-										{{ $module->description }}
+										{{ $exercise->title }}
+									</td>
+									<td>
+										{{ $exercise->type }}
+									</td>
+									<td>
+										{{ $exercise->shortcode }}
+									</td>
+									<td>
+										<img height="50" width="50" src="{{ URL::asset('assets/screenshots/') }}/{{ $exercise->screenshot }}" alt="" />
 									</td>
 									<td>
 										{{ date('M d, Y', strtotime($module->created_at)) }}
@@ -174,7 +192,6 @@
 										<a class="delete" href="{{ URL::route('admin.modules.destroy', $module->id) }}">
 											 Delete
 										</a>
-										
 									</td>
 								</tr>
 							@endforeach

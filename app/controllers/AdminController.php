@@ -489,13 +489,62 @@ class AdminController extends BaseController {
 
 	//admin exercises
 
-	public function getExercisesList()
+	public function getExercisesList($slug)
 	{
-		$modules = Module::all();
+		$module = Module::where('module_slug', '=', $slug)->first();
+
+		$exercises = Exercise::where('module_id', '=', $module->id)->get();
 
 		return View::make('admin.exercises.index')
-			->with('modules', $modules)
-			->with('title', 'Admin - List of Exercises');
+			->with('module', $module)
+			->with('exercises', $exercises)
+			->with('title', 'Admin - List of Module Exercises');
+	}
+
+	public function createExercise($slug)
+	{
+		$module = Module::where('module_slug', '=', $slug)->first();
+
+		return View::make('admin.exercises.create')
+			->with('module', $module)
+			->with('title', 'Create Questions');
+	}
+
+	public function storeExercise($slug)
+	{
+		$module = Module::where('module_slug', '=', $slug)->first();
+
+		$input = Input::all();
+		$rules = array(
+					'exercise_slug' => 'required|min:3',
+					'exercise_title' => 'required|min:3',
+					'type' => 'required|min:1',
+					'shortcode' => 'required|min:3',
+					'screenshot' => 'required|min:3',
+				);
+
+		$validation = Validator::make($input, $rules);
+
+		if($validation->fails()) 
+		{
+			return Redirect::back()->withErrors($validation)->withInput();
+		}
+		else 
+		{
+			$data = array(
+				'exercise_slug' => Input::get('exercise_slug'),
+				'exercise_title' => Input::get('exercise_title'),
+				'module_id' => $module->id,
+				'exercise_type' => Input::get('exercise_type'),
+				'shortcode' => Input::get('shortcode'),
+				'screenshot' => Input::get('screenshot')
+			);
+			
+			
+			$exercise = Exercise::adminStoreExercise($data);
+			return Redirect::route('admin.questions.create', $module->module_slug)
+				->with('message', 'Successfully Added New Question.');
+		}
 	}
 
 }

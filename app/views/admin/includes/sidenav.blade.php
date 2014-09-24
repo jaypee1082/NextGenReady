@@ -107,7 +107,7 @@
 						</li>
 					</ul>
 				</li>-->
-				<li>
+				<!--<li>
 					<a href="javascript:;">
 						<i class="fa fa-list-alt"></i>
 						<span class="title">
@@ -123,14 +123,8 @@
 								View list
 							</a>
 						</li>
-						<li>
-							<a href="#">
-								<i class="fa fa-plus"></i>
-								Add new question
-							</a>
-						</li>
 					</ul>
-				</li>
+				</li>-->
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>
