@@ -19,9 +19,16 @@
 Route::get('/', array('as' => 'home', 'uses' => 'HomeController@getIndex'));
 
 Route::post('users/login/attempt', array('as' => 'users.login.attempt', 'uses' => 'UsersController@userLoginAttempt'));
+// transfer logout later on
 Route::get('logout',  array('as' => 'users.logout', function() {
-    Auth::logout();
-   //Session::flush();
+   
+    $eventlog = new Eventlog;
+	$eventlog->user_id = Auth::user()->id;
+	$eventlog->action = 'logout';
+	$eventlog->save();
+
+	Auth::logout();
+    //Session::flush();
     return Redirect::to('/');
 }));
 
@@ -81,14 +88,17 @@ Route::get('admin/module/{slug?}/questions/list', array('as' => 'admin.questions
 Route::get('admin/module/{slug?}/questions/create', array('as' => 'admin.questions.create', 'uses' => 'AdminController@createQuestion'));
 Route::post('admin/module/{slug?}/questions/store', array('as' => 'admin.questions.store', 'uses' => 'AdminController@storeQuestion'));
 Route::get('admin/module/question/{id?}/edit', array('as' => 'admin.questions.edit', 'uses' => 'AdminController@editQuestion'));
-Route::patch('admin/module/{id?}/update', array('as' => 'admin.questions.update', 'uses' => 'AdminController@updateQuestion'));
-Route::get('admin/module/{id?}/delete', array('as' => 'admin.questions.destroy', 'uses' => 'AdminController@destroyQuestion'));
+Route::patch('admin/module/question/{id?}/update', array('as' => 'admin.questions.update', 'uses' => 'AdminController@updateQuestion'));
+Route::get('admin/module/question/{id?}/delete', array('as' => 'admin.questions.destroy', 'uses' => 'AdminController@destroyQuestion'));
 
 /* -- Administrator Exercise Routes -- */
 
-Route::get('admin/module/{slug?}/exercises/list', array('as' => 'admin.exercises', 'uses' => 'AdminController@getExercisesList'));
-Route::get('admin/module/{slug?}/exercises/create', array('as' => 'admin.exercises.create', 'uses' => 'AdminController@createExercise'));
-Route::post('admin/module/{slug?}/qexercises/store', array('as' => 'admin.exercises.store', 'uses' => 'AdminController@storeExercise'));
+Route::get('admin/module/{slug?}/activities/list', array('as' => 'admin.activities', 'uses' => 'AdminController@getActivitiesList'));
+Route::get('admin/module/{slug?}/activities/create', array('as' => 'admin.activities.create', 'uses' => 'AdminController@createActivities'));
+Route::post('admin/module/{slug?}/activities/store', array('as' => 'admin.activities.store', 'uses' => 'AdminController@storeActivities'));
+
+/* -- Administrator Event Logs Routes -- */
+Route::get('admin/event-logs/list', array('as' => 'admin.eventlogs', 'uses' => 'AdminController@getEventLogsList'));
 
 //Route::get('admin/module/sample', array('as' => 'admin.module.sample', 'uses' => 'ModulesController@getSample'));
 //Route::post('admin/module/store', array('as' => 'admin.module.store', 'uses' => 'ModulesController@storeSample'));

@@ -34,6 +34,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->hasOne('Role', 'id', 'role_id');
 	}
 
+	public function eventLogs()
+	{
+		return $this->hasMany('Eventlog');
+	}
+
 	public static function adminStoreUser($data) 
 	{
 		$user = new User;

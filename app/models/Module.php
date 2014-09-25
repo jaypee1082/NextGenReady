@@ -29,8 +29,8 @@ class Module extends Eloquent {
 		return $this->hasMany('Question');
 	}
 
-	public function exercises()
+	public function activities()
 	{
-		return $this->hasMany('Exercise');
+		return $this->hasMany('Activity');
 	}
 }

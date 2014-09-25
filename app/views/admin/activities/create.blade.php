@@ -44,7 +44,7 @@
 		</div>
 		<div class="portlet-body form">
 			<!-- BEGIN FORM-->
-			{{ Form::open(array('route' => 'admin.exercises.store', 'method' => 'POST', 'class' => 'form-horizontal form-bordered form-row-stripped')) }}
+			{{ Form::open(array('route' => 'admin.activities.store', 'method' => 'POST', 'class' => 'form-horizontal form-bordered form-row-stripped')) }}
 				<div class="form-body">
 					<div class="form-group">
 						<label class="control-label col-md-3">Module Name <span style="color: red;">*</span></label>

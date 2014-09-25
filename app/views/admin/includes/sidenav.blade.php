@@ -118,13 +118,31 @@
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="{{ URL::route('admin.exercises') }}">
+							<a href="#">
 								<i class="fa fa-list"></i>
 								View list
 							</a>
 						</li>
 					</ul>
 				</li>-->
+				<li>
+					<a href="javascript:;">
+						<i class="fa fa-list-alt"></i>
+						<span class="title">
+							Event Logs
+						</span>
+						<span class="arrow ">
+						</span>
+					</a>
+					<ul class="sub-menu">
+						<li>
+							<a href="{{ URL::route('admin.eventlogs') }}">
+								<i class="fa fa-list"></i>
+								View list
+							</a>
+						</li>
+					</ul>
+				</li>
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>

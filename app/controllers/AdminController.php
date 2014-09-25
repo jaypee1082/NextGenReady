@@ -398,7 +398,7 @@ class AdminController extends BaseController {
 		$input = Input::all();
 		$rules = array(
 					'question' => 'required|min:20',
-					'answer' => 'required|min:1',
+					'answer' => 'required',
 					);
 
 		$validation = Validator::make($input, $rules);
@@ -487,30 +487,30 @@ class AdminController extends BaseController {
 		return Redirect::route('admin.questions', $module_slug);
 	}
 
-	//admin exercises
+	//admin activities
 
-	public function getExercisesList($slug)
+	public function getActivitiesList($slug)
 	{
 		$module = Module::where('module_slug', '=', $slug)->first();
 
-		$exercises = Exercise::where('module_id', '=', $module->id)->get();
+		$activities = Activity::where('module_id', '=', $module->id)->get();
 
-		return View::make('admin.exercises.index')
+		return View::make('admin.activities.index')
 			->with('module', $module)
-			->with('exercises', $exercises)
-			->with('title', 'Admin - List of Module Exercises');
+			->with('activities', $activities)
+			->with('title', 'Admin - List of Module Activities');
 	}
 
-	public function createExercise($slug)
+	public function createActivities($slug)
 	{
 		$module = Module::where('module_slug', '=', $slug)->first();
 
-		return View::make('admin.exercises.create')
+		return View::make('admin.activities.create')
 			->with('module', $module)
 			->with('title', 'Create Questions');
 	}
 
-	public function storeExercise($slug)
+	public function storeActivities($slug)
 	{
 		$module = Module::where('module_slug', '=', $slug)->first();
 
@@ -545,6 +545,17 @@ class AdminController extends BaseController {
 			return Redirect::route('admin.questions.create', $module->module_slug)
 				->with('message', 'Successfully Added New Question.');
 		}
+	}
+
+	//admin eventlogs
+
+	public function getEventLogsList()
+	{
+		$eventlogs = Eventlog::all();
+
+		return View::make('admin.eventlogs.index')
+			->with('eventlogs', $eventlogs)
+			->with('title', 'Admin - List of User Event Logs');
 	}
 
 }

@@ -103,7 +103,7 @@
 				<div class="portlet-body">
 					<div class="table-toolbar">
 						<div class="btn-group">
-							<a href="{{ URL::route('admin.modules.create') }}" id="sample_editable_1_new" class="btn green">
+							<a href="{{ URL::route('admin.activities.create', $module->module_slug) }}" id="sample_editable_1_new" class="btn green">
 							Add New <i class="fa fa-plus"></i>
 							</a>
 						</div>
@@ -157,39 +157,39 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($exercises as $exercise)
+							@foreach($activities as $activity)
 								<tr class="odd gradeX">
 									<td>
-										<input type="checkbox" class="checkboxes" value="{{ $exercise->id }}"/>
+										<input type="checkbox" class="checkboxes" value="{{ $activity->id }}"/>
 									</td>
 									<td>
-										{{ $exercise->exercise_slug }}
+										{{ $activity->exercise_slug }}
 									</td>
 									<td>
-										{{ $exercise->modules->module_name }}
+										{{ $activity->modules->module_name }}
 									</td>
 									<td class="center" style="white-space: normal !important;">
-										{{ $exercise->title }}
+										{{ $activity->title }}
 									</td>
 									<td>
-										{{ $exercise->type }}
+										{{ $activity->type }}
 									</td>
 									<td>
-										{{ $exercise->shortcode }}
+										{{ $activity->shortcode }}
 									</td>
 									<td>
-										<img height="50" width="50" src="{{ URL::asset('assets/screenshots/') }}/{{ $exercise->screenshot }}" alt="" />
+										<img height="50" width="50" src="{{ URL::asset('assets/screenshots/') }}/{{ $activity->screenshot }}" alt="" />
 									</td>
 									<td>
-										{{ date('M d, Y', strtotime($module->created_at)) }}
+										{{ date('M d, Y', strtotime($activity->created_at)) }}
 									</td>
 									<td>
-										<a class="edit" href="{{ URL::route('admin.modules.edit', $module->id) }}">
+										<a class="edit" href="{{ URL::route('admin.modules.edit', $activity->id) }}">
 											 Edit
 										</a>
 									
 										|
-										<a class="delete" href="{{ URL::route('admin.modules.destroy', $module->id) }}">
+										<a class="delete" href="{{ URL::route('admin.modules.destroy', $activity->id) }}">
 											 Delete
 										</a>
 									</td>

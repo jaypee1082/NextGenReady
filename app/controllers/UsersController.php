@@ -93,6 +93,12 @@ class UsersController extends BaseController {
 
 		if(Auth::attempt($data)) 
 		{		
+
+			$eventlog = new Eventlog;
+			$eventlog->user_id = Auth::user()->id;
+			$eventlog->action = 'login';
+			$eventlog->save();
+
 			if(Auth::user()->role_id == '1')
 			{
 				return Redirect::route('admin.index', Auth::user()->id);
@@ -113,6 +119,7 @@ class UsersController extends BaseController {
 			{
 				Auth::logout();
 			}
+
 		}
 		else 
 		{

@@ -103,7 +103,7 @@
 				<div class="portlet-body">
 					<div class="table-toolbar">
 						<div class="btn-group">
-							<a href="{{ URL::route('admin.questions.create', $module->id) }}" id="sample_editable_1_new" class="btn green">
+							<a href="{{ URL::route('admin.questions.create', $module->module_slug) }}" id="sample_editable_1_new" class="btn green">
 							Add New <i class="fa fa-plus"></i>
 							</a>
 						</div>
