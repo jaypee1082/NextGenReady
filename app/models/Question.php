@@ -1,5 +1,7 @@
 <?php
 
+use Intervention\Image\ImageManagerStatic as Image;
+
 class Question extends Eloquent {
 
 	protected $table = 'questions';
@@ -50,41 +52,32 @@ class Question extends Eloquent {
 		$question = Question::find($id);
 		$question->question = $data['question'];
 		$question->answer = $data['answer'];
+		$question->question_type_id = $data['question_type_id'];
 		$question->push();
 		
-		/*$choice_1 = Choice::find($choice_id_1);
-		$choice_1->choice = $data['choice_1'];
-		$choice_1->push();
-
-		$choice_2 = Choice::find($choice_id_2);
-		$choice_2->choice = $data['choice_2'];
-		$choice_2->push();
-
-		$choice_3 = Choice::find($choice_id_3);
-		$choice_3->choice = $data['choice_3'];
-		$choice_3->push();
-
-		$choice_4 = Choice::find($choice_id_4);
-		$choice_4->choice = $data['choice_4'];
-		$choice_4->push();*/
-
 		$choices = $data['choices'];
+		$images = $data['images'];
 		$choice_ids = $data['choice_ids'];
-
-/*		foreach($choice_ids as $choice_id)
-		{
-			echo '<pre>';
-			print_r($choice_id);
-			echo '</pre>';
-		}
-		die;*/
 
 		for($i = 0; $i < count($choices); $i++)
 		{
+			if($images != null)
+			{
+			    $destinationPath = public_path().'/assets/choice_images/';
+		        $filename = $destinationPath . $images[$i]->getClientOriginalName();
+				Image::make($images[$i]->getRealPath())->save($filename);
+				$name = $images[$i]->getClientOriginalName();
+			} else 
+			{
+				$name = '';
+			}
+
 			$_choice = Choice::find($choice_ids[$i]);
 			$_choice->choice = $choices[$i];
+			$_choice->image = $name;
 			$_choice->push();
-		} 
+	
+		}
 
 		return Question::find($question->id);
 	}

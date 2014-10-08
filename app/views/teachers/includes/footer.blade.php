@@ -1,5 +1,5 @@
 	<div class="footer-inner">
-		 2014 &copy; Metronic by keenthemes.
+		 2014 &copy; NexGenReady. All Rights Reserved.
 	</div>
 	<div class="footer-tools">
 		<span class="go-top">

@@ -1,5 +1,7 @@
 <?php
 
+use Intervention\Image\ImageManagerStatic as Image;
+
 class AdminController extends BaseController {
 
 	/**
@@ -426,6 +428,8 @@ class AdminController extends BaseController {
 	public function editQuestion($id)
 	{
 		$question = Question::find($id);
+		$question_types = QuestionType::all();
+		$module = Module::where('id', '=', $question->module_id)->first();
 		$choices = Choice::where('question_id', '=', $question->id)->get();
 
 	/*	foreach($choices as $choice)
@@ -438,7 +442,9 @@ class AdminController extends BaseController {
 
 		return View::make('admin.questions.edit')
 			->with('question', $question)
+			->with('question_types', $question_types)
 			->with('choices', $choices)
+			->with('module', $module)
 			->with('title', 'Edit Question');
 			
 	}
@@ -467,6 +473,8 @@ class AdminController extends BaseController {
 				'answer' => Input::get('answer'),
 				'choices' => Input::get('choices'),
 				'choice_ids' => Input::get('choice_ids'),
+				'question_type_id' => Input::get('question_type'),
+				'images' => Input::file('choice_images')
 				);
 		
 			$module = Question::adminUpdateQuestion($id, $data);
@@ -493,6 +501,8 @@ class AdminController extends BaseController {
 	{
 		$module = Module::where('module_slug', '=', $slug)->first();
 
+		Session::put('module_slug', $module->module_slug);
+
 		$activities = Activity::where('module_id', '=', $module->id)->get();
 
 		return View::make('admin.activities.index')
@@ -517,10 +527,9 @@ class AdminController extends BaseController {
 		$input = Input::all();
 		$rules = array(
 					'exercise_slug' => 'required|min:3',
-					'exercise_title' => 'required|min:3',
-					'type' => 'required|min:1',
+					'activity_title' => 'required|min:3',
+					'activity_type' => 'required|min:1',
 					'shortcode' => 'required|min:3',
-					'screenshot' => 'required|min:3',
 				);
 
 		$validation = Validator::make($input, $rules);
@@ -531,27 +540,115 @@ class AdminController extends BaseController {
 		}
 		else 
 		{
+			$file = Input::file('screenshot');
+
+			//dd($file);
+
+			if($file != null)
+			{
+	            $destinationPath = public_path().'/assets/screenshots/';
+	            $filename = $destinationPath . $file->getClientOriginalName();
+
+				Image::make($file->getRealPath())->save($filename);
+				$screenshot = $file->getClientOriginalName();
+			}
+
 			$data = array(
+				'screenshot' => $screenshot,
 				'exercise_slug' => Input::get('exercise_slug'),
-				'exercise_title' => Input::get('exercise_title'),
+				'activity_title' => Input::get('activity_title'),
 				'module_id' => $module->id,
-				'exercise_type' => Input::get('exercise_type'),
+				'activity_type' => Input::get('activity_type'),
 				'shortcode' => Input::get('shortcode'),
-				'screenshot' => Input::get('screenshot')
 			);
 			
 			
-			$exercise = Exercise::adminStoreExercise($data);
-			return Redirect::route('admin.questions.create', $module->module_slug)
-				->with('message', 'Successfully Added New Question.');
+			$activity = Activity::adminStoreActivities($data);
+			return Redirect::route('admin.activities.create', $module->module_slug)
+				->with('message', 'Successfully Added New Activity.');
 		}
+	}
+
+	public function editActivities($id)
+	{
+		$activity = Activity::find($id);
+
+		return View::make('admin.activities.edit')
+			->with('activity', $activity)
+			->with('title', 'Edit Activity');
+			
+	}
+
+	public function updateActivities($id)
+	{
+		$activity = Activity::find($id);
+
+		$input = Input::all();
+		$rules = array(
+			'exercise_slug' => 'required|min:3',
+			'activity_title' => 'required|min:3',
+			'activity_type' => 'required|min:1',
+			'shortcode' => 'required|min:3',
+		);
+
+		$validation = Validator::make($input, $rules);
+
+		if($validation->fails())
+		{
+			return Redirect::back()->withErrors($validation);
+		}
+		else
+		{
+
+			$file = Input::file('screenshot');
+
+			//dd($file);
+
+			if($file != null)
+			{
+	            $destinationPath = public_path().'/assets/screenshots/';
+	            $filename = $destinationPath . $file->getClientOriginalName();
+
+				Image::make($file->getRealPath())->save($filename);
+				$screenshot = $file->getClientOriginalName();
+			} else {
+				$screenshot = $activity->screenshot;
+			}
+			
+			$data = array(
+				'screenshot' => $screenshot,
+				'exercise_slug' => Input::get('exercise_slug'),
+				'activity_title' => Input::get('activity_title'),
+				'activity_type' => Input::get('activity_type'),
+				'shortcode' => Input::get('shortcode'),
+			);	
+		
+			$activity = Activity::adminUpdateActivities($activity->id, $data);
+
+			return Redirect::route('admin.activities.edit', $activity->id)
+							->with('message', 'Update Successful!');
+		}
+
+	}
+
+	public function destroyActivities($id)
+	{
+
+		$module_slug = Session::get('module_slug');
+		$activity = Activity::find($id)->delete();
+
+		return Redirect::route('admin.activities', $module_slug);
 	}
 
 	//admin eventlogs
 
 	public function getEventLogsList()
 	{
-		$eventlogs = Eventlog::all();
+	/*	$eventlogs = Eventlog::with(array('users' => function($query){
+		    $query->orderBy('created_at', 'desc')->groupBy('id');
+		}))->get();*/
+
+		$eventlogs = Eventlog::orderBy('created_at', 'desc')->get();
 
 		return View::make('admin.eventlogs.index')
 			->with('eventlogs', $eventlogs)

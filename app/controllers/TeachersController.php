@@ -10,7 +10,8 @@ class TeachersController extends BaseController {
 	 */
 	public function index()
 	{
-		return View::make('teachers.dashboard');
+		return View::make('teachers.dashboard')
+			->with('title', 'Teachers - Dashboard');
 	}
 
 	/**

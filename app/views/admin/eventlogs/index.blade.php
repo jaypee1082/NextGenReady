@@ -93,7 +93,7 @@
 										{{ $eventlog->action }}
 									</td>
 									<td class="center" style="white-space: normal !important;">
-										{{ date('M d, Y h:i:sa', strtotime($eventlog->created_at)) }}
+										{{ date('M d, Y | h:i:s a', strtotime($eventlog->created_at)) }}
 									</td>
 								</tr>
 							@endforeach

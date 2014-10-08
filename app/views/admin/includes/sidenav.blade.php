@@ -138,7 +138,19 @@
 						<li>
 							<a href="{{ URL::route('admin.eventlogs') }}">
 								<i class="fa fa-list"></i>
-								View list
+								User login logs
+							</a>
+						</li>
+						<li>
+							<a href="{{ URL::route('admin.eventlogs') }}">
+								<i class="fa fa-list"></i>
+								Teacher logs
+							</a>
+						</li>
+						<li>
+							<a href="{{ URL::route('admin.eventlogs') }}">
+								<i class="fa fa-list"></i>
+								Student logs
 							</a>
 						</li>
 					</ul>

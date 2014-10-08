@@ -3,7 +3,7 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="" name="description"/>
 <meta content="" name="author"/>
-
+{{ HTML::script('assets/plugins/jquery-1.10.2.min.js') }}
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 {{ HTML::style('http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all') }}
 {{ HTML::style('assets/plugins/font-awesome/css/font-awesome.min.css') }}
@@ -23,11 +23,11 @@
 {{ HTML::style('assets/css/style-responsive.css') }}
 {{ HTML::style('assets/css/plugins.css') }}
 {{ HTML::style('assets/css/pages/tasks.css') }}
-<link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
-<link href="assets/css/print.css" rel="stylesheet" type="text/css" media="print"/>
+<link href="{{ URL::asset('assets/css/themes/blue.css') }}" rel="stylesheet" type="text/css" id="style_color"/>
+<link href="{{ URL::asset('assets/css/print.css') }}" rel="stylesheet" type="text/css" media="print"/>
 {{ HTML::style('assets/css/custom.css') }}
 
 <!-- nextgenready styling -->
 {{ HTML::style('assets/css/nexgenready.css') }}
 <!-- END THEME STYLES -->
-<link rel="shortcut icon" href="favicon.ico"/>
+<link rel="shortcut icon" href="{{ URL::asset('assets/favicon.ico') }}"/>

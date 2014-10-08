@@ -96,6 +96,9 @@ Route::get('admin/module/question/{id?}/delete', array('as' => 'admin.questions.
 Route::get('admin/module/{slug?}/activities/list', array('as' => 'admin.activities', 'uses' => 'AdminController@getActivitiesList'));
 Route::get('admin/module/{slug?}/activities/create', array('as' => 'admin.activities.create', 'uses' => 'AdminController@createActivities'));
 Route::post('admin/module/{slug?}/activities/store', array('as' => 'admin.activities.store', 'uses' => 'AdminController@storeActivities'));
+Route::get('admin/module/activity/{id?}/edit', array('as' => 'admin.activities.edit', 'uses' => 'AdminController@editActivities'));
+Route::patch('admin/module/activity/{id?}/update', array('as' => 'admin.activities.update', 'uses' => 'AdminController@updateActivities'));
+Route::get('admin/module/activity/{id?}/delete', array('as' => 'admin.activities.destroy', 'uses' => 'AdminController@destroyActivities'));
 
 /* -- Administrator Event Logs Routes -- */
 Route::get('admin/event-logs/list', array('as' => 'admin.eventlogs', 'uses' => 'AdminController@getEventLogsList'));

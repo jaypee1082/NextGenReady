@@ -11,7 +11,7 @@ var TableManaged = function () {
 
             // begin first table
             $('#sample_1').dataTable({
-     /*           "aoColumns": [
+/*                "aoColumns": [
                   { "bSortable": false },
                   null,
                   { "bSortable": false, "sType": "text" },

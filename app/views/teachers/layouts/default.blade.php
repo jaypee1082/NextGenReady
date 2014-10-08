@@ -15,7 +15,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
-	<title>Teacher Dashboard</title>
+	<title>NexGenReady | {{ $title }}</title>
 	@include('teachers.includes.head')
 </head>
 <!-- END HEAD -->
@@ -28,7 +28,9 @@ License: You must have a valid license purchased only from themeforest(the above
 			@include('teachers.includes.sidenav')
 
 			<div class="page-content-wrapper">
-				@yield('teachers.content')
+				<div class="page-content">
+					@yield('teachers.content')
+				</div>
 			</div>
 		</div>
 		<!--FOOTER -->

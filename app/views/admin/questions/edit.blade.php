@@ -42,9 +42,9 @@
 				</a>
 			</div>
 		</div>
-		<div class="portlet-body form">
+		<div class="portlet-body form" style="margin-top: -5px;">
 			<!-- BEGIN FORM-->
-			{{ Form::open(array('route' => array('admin.questions.update', $question->id), 'method' => 'PATCH', 'class' => 'form-horizontal form-bordered form-row-stripped')) }}
+			{{ Form::open(array('route' => array('admin.questions.update', $question->id), 'method' => 'PATCH', 'class' => 'form-horizontal form-bordered form-row-stripped', 'enctype' => 'multipart/form-data', 'files' => true)) }}
 				<div class="form-body">
 					<span class="help-block">
 						@if($errors->has())
@@ -67,6 +67,16 @@
 		               	@endif	
 					</span>
 					<div class="form-group">
+						<label class="control-label col-md-3">Question Type</label>
+						<div class="col-md-9">
+							<select class="form-control" name="question_type" id="question_type">
+								@foreach($question_types as $question_type)
+									<option value="{{ $question_type->id }}" <?php if($question_type->id == $question->question_type_id) echo 'selected' ?>>{{ $question_type->question_type }}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
 						<label class="control-label col-md-3">Question<span style="color: red;">*</span></label>
 						<div class="col-md-9">
 							 {{ Form::text('question', $question->question, array('placeholder' => 'Question', 'class' => 'form-control')) }}
@@ -84,12 +94,26 @@
 							<label class="control-label col-md-3">Choice {{ $ctr }}<span style="color: red;">*</span></label>
 							<div class="col-md-9">
 								<input type="text" name="choices[]" value="{{ $choice->choice }}" class="form-control">
-								<!--<span class="help-block">
-									@if($errors->has())
-		                           		{{ $errors->first('choice_<?php echo $ctr ?>', '<li style="color: red;">:message</li>') }}
-		                           	@endif	
-								</span>-->
 								<input type="hidden" name="choice_ids[]" value="{{ $choice->id }}" class="form-control">
+							</div>
+						</div>
+						<div class="question_type_2">
+							@if($choice->image != null)
+								<div class="form-group">
+									<label class="control-label col-md-3">Image</label>
+									<div class="col-md-9">
+										<img height="100" width="100" src="{{ URL::asset('assets/choice_images/') }}/{{ $choice->image }}" alt="" />
+									</div>
+								</div>
+							@endif
+							<div class="form-group">
+								<label class="control-label col-md-3">Choice Image {{ $ctr }}</label>
+								<div class="col-md-9">
+									{{ Form::file('choice_images[]', '', array('id' => 'file', 'class' => 'form-control', 'id' => 'exampleInputFile1', 'accept' => 'image/jpeg,image/png,image/gif',)) }}
+									<span class="help-block">
+										(upload a new choice image)
+									</span>
+								</div>
 							</div>
 						</div>
 					@endforeach
@@ -110,6 +134,7 @@
 						<div class="col-md-12">
 							<div class="col-md-offset-3 col-md-9">
 								{{ Form::submit('Update', array('class' => 'btn green', 'name' => 'update_module')) }}
+								<a href="{{ URL::route('admin.questions', $module->module_slug) }}" class="btn green">Back to List</a>
 							</div>
 						</div>
 					</div>
@@ -118,5 +143,43 @@
 			<!-- END FORM-->
 		</div>
 	</div>
+	<script>
+		$(function() {
+	        var scntDiv = $('#choices_group');
+	        var k = $('#choices_group div.form-group').size() + 3;
+	        var i = $('#choices_group div.choices_form').size() + 4;
+	        
+	        //hiding and showing question on change
+
+	        $('#question_type').change(function() {
+	        	var type = $(this).val();
+	        	if(type == 1)
+	        	{
+	        		$('.question_type_2').hide();
+	        	}
+	        	else if(type == 2)
+	        	{
+	        		$('.question_type_2').each(function(){
+	        			$(this).css('display','block');
+	        		});
+	        	}
+	        	else if(type == 3)
+	        	{
+	        		$('.question_type_2').hide();
+	        	}
+	        	else if(type == 4)
+	        	{
+	        		$('.question_type_2').each(function(){
+	        			$(this).css('display','block');
+	        		});
+	        	}
+	        	else
+	        	{
+	        		$('.question_type_2').hide();
+	        	}
+			}).change(); 
+
+		});
+	</script>
 </div>
 @stop

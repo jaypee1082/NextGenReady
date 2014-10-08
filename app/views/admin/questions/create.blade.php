@@ -44,7 +44,7 @@
 		</div>
 		<div class="portlet-body form">
 			<!-- BEGIN FORM-->
-			{{ Form::open(array('route' => array('admin.questions.store', $module->module_slug), 'method' => 'POST', 'class' => 'form-horizontal form-bordered form-row-stripped')) }}
+			{{ Form::open(array('route' => array('admin.questions.store', $module->module_slug), 'method' => 'POST', 'class' => 'form-horizontal form-bordered form-row-stripped', 'enctype' => 'multipart/form-data')) }}
 				<div class="form-body">
 					<div class="form-group">
 						<label class="control-label col-md-3">Question Type</label>
@@ -72,9 +72,7 @@
 						<div class="col-md-9">
 							{{ Form::text('choices[]', '', array('placeholder' => 'Choice 1 - A', 'class' => 'form-control')) }}
 							<span class="help-block">
-								@if($errors->has())
-	                           		{{ $errors->first('choice_1', '<li style="color: red;">:message</li>') }}
-	                           	@endif
+
 							</span>
 						</div>
 					</div>
@@ -96,9 +94,7 @@
 						<div class="col-md-9">
 							{{ Form::text('choices[]', '', array('placeholder' => 'Choice 2 - B', 'class' => 'form-control')) }}
 							<span class="help-block">
-								@if($errors->has())
-	                           		{{ $errors->first('choice_2', '<li style="color: red;">:message</li>') }}
-	                           	@endif
+
 							</span>
 						</div>
 					</div>
@@ -108,9 +104,7 @@
 							<div class="col-md-9">
 								{{ Form::text('choice_images[]', '', array('placeholder' => 'Image for Choice 2 - B', 'class' => 'form-control')) }}
 								<span class="help-block">
-									@if($errors->has())
-		                           		{{ $errors->first('choice_image_2', '<li style="color: red;">:message</li>') }}
-		                           	@endif
+
 								</span>
 							</div>
 						</div>
@@ -120,9 +114,7 @@
 						<div class="col-md-9">
 							{{ Form::text('choices[]', '', array('placeholder' => 'Choice 3 - C', 'class' => 'form-control')) }}
 							<span class="help-block">
-								@if($errors->has())
-	                           		{{ $errors->first('choice_3', '<li style="color: red;">:message</li>') }}
-	                           	@endif
+
 							</span>
 						</div>
 					</div>
@@ -132,9 +124,7 @@
 							<div class="col-md-9">
 								{{ Form::text('choice_images[]', '', array('placeholder' => 'Image for Choice 3 - B', 'class' => 'form-control')) }}
 								<span class="help-block">
-									@if($errors->has())
-		                           		{{ $errors->first('choice_image_3', '<li style="color: red;">:message</li>') }}
-		                           	@endif
+
 								</span>
 							</div>
 						</div>
@@ -146,9 +136,7 @@
 								<div class="col-md-9">
 									{{ Form::text('choices[]', '', array('placeholder' => 'Choice 4 - D', 'class' => 'form-control')) }}
 									<span class="help-block">
-									@if($errors->has())
-		                           		{{ $errors->first('choice_4', '<li style="color: red;">:message</li>') }}
-		                           	@endif
+
 								</span>
 								</div>
 							</div>	
@@ -158,9 +146,7 @@
 									<div class="col-md-9">
 										{{ Form::text('choice_images[]', '', array('placeholder' => 'Image for Choice 4 - B', 'class' => 'form-control')) }}
 										<span class="help-block">
-											@if($errors->has())
-				                           		{{ $errors->first('choice_image_4', '<li style="color: red;">:message</li>') }}
-				                           	@endif
+
 										</span>
 									</div>
 								</div>
@@ -172,9 +158,7 @@
 						<div class="col-md-9">
 							{{ Form::text('answer', '', array('placeholder' => 'Answer', 'class' => 'form-control')) }}
 							<span class="help-block">
-								@if($errors->has())
-	                           		{{ $errors->first('answer', '<li style="color: red;">:message</li>') }}
-	                           	@endif
+
 							</span>
 						</div>
 					</div>		
@@ -203,25 +187,8 @@
 	        
 	         $('#question_type').change(function() {
 	         	var type = $(this).val();
-	         	if(type == 2)
-	         	{
-	         		$('#addScnt').css('display', 'inline-block');
-			    	$('#addScnt2').css('display', 'none');
-			        $('#addScnt').live('click', function() {
-			                $('<div class="choices_form"><div class="form-group"><label class="control-label col-md-3">Choice '+ i +'</label><div class="col-md-9"><input type="text" class="form-control" name="choices[]" value="" placeholder="Choice '+ i +'" /><span class="help-block"></span></div></div><div class="form-group"><label class="control-label col-md-3">Choice '+ i +'</label><div class="col-md-9"><input type="text" class="form-control" name="choice_images[]" value="" placeholder="Choice Images'+ i +'" /><span class="help-block"><a href="#" id="remScnt">Remove</a></span></div></div></div>').appendTo(scntDiv);
-			                i++;
-			                return false;
-			        });
-			        
-			        $('#remScnt').live('click', function() { 
-			                if( i > 4 ) {
-			                        $(this).parents('div.choices_form').remove();
-			                        i--;
-			                }
-			                return false;
-			        });
-			    }
-			    if(type == 1)
+
+	         	if(type == 1 || type == 3)
 			    {
 			    	$('#addScnt2').css('display', 'inline-block');
 			    	$('#addScnt').css('display', 'none');
@@ -239,6 +206,26 @@
 			                return false;
 			        });
 			    } 
+
+	         	if(type == 2 || type == 4)
+	         	{
+	         		$('#addScnt').css('display', 'inline-block');
+			    	$('#addScnt2').css('display', 'none');
+			        $('#addScnt').live('click', function() {
+			                $('<div class="choices_form"><div class="form-group"><label class="control-label col-md-3">Choice '+ i +'</label><div class="col-md-9"><input type="text" class="form-control" name="choices[]" value="" placeholder="Choice '+ i +'" /><span class="help-block"></span></div></div><div class="form-group"><label class="control-label col-md-3">Choice '+ i +'</label><div class="col-md-9"><input type="text" class="form-control" name="choice_images[]" value="" placeholder="Choice Images'+ i +'" /><span class="help-block"><a href="#" id="remScnt">Remove</a></span></div></div></div>').appendTo(scntDiv);
+			                i++;
+			                return false;
+			        });
+			        
+			        $('#remScnt').live('click', function() { 
+			                if( i > 4 ) {
+			                        $(this).parents('div.choices_form').remove();
+			                        i--;
+			                }
+			                return false;
+			        });
+			    }
+
 		    }); 
 
 	        //hiding and showing question on change

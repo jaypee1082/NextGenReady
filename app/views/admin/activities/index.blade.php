@@ -184,12 +184,12 @@
 										{{ date('M d, Y', strtotime($activity->created_at)) }}
 									</td>
 									<td>
-										<a class="edit" href="{{ URL::route('admin.modules.edit', $activity->id) }}">
+										<a class="edit" href="{{ URL::route('admin.activities.edit', $activity->id) }}">
 											 Edit
 										</a>
 									
 										|
-										<a class="delete" href="{{ URL::route('admin.modules.destroy', $activity->id) }}">
+										<a class="delete" href="{{ URL::route('admin.activities.destroy', $activity->id) }}">
 											 Delete
 										</a>
 									</td>

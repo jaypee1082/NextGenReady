@@ -29,7 +29,7 @@
 	<div class="portlet box blue ">
 		<div class="portlet-title">
 			<div class="caption">
-				<i class="fa fa-reorder"></i>Create Exercise for {{ $module->module_name }}
+				<i class="fa fa-reorder"></i>Create Activities for {{ $module->module_name }}
 			</div>
 			<div class="tools">
 				<a href="javascript:;" class="collapse">
@@ -44,39 +44,54 @@
 		</div>
 		<div class="portlet-body form">
 			<!-- BEGIN FORM-->
-			{{ Form::open(array('route' => 'admin.activities.store', 'method' => 'POST', 'class' => 'form-horizontal form-bordered form-row-stripped')) }}
+			{{ Form::open(array('route' => array('admin.activities.store', $module->module_slug), 'method' => 'POST', 'class' => 'form-horizontal form-bordered form-row-stripped', 'enctype' => 'multipart/form-data')) }}
 				<div class="form-body">
 					<div class="form-group">
-						<label class="control-label col-md-3">Module Name <span style="color: red;">*</span></label>
+						<label class="control-label col-md-3">Exercise Slug <span style="color: red;">*</span></label>
 						<div class="col-md-9">
-							 {{ Form::text('module_name','', array('placeholder' => 'Module Name', 'class' => 'form-control')) }}
+							 {{ Form::text('exercise_slug','', array('placeholder' => 'Exercise Slug', 'class' => 'form-control')) }}
 							 <span class="help-block">
 							@if($errors->has())
-                           		{{ $errors->first('module_name', '<li style="color: red;">:message</li>') }}
+                           		{{ $errors->first('exercise_slug', '<li style="color: red;">:message</li>') }}
                            	@endif
 						</span>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Module Slug <span style="color: red;">*</span></label>
+						<label class="control-label col-md-3">Title <span style="color: red;">*</span></label>
 						<div class="col-md-9">
-							{{ Form::text('module_slug', '',array('placeholder' => 'Module Slug', 'class' => 'form-control')) }}
+							{{ Form::text('activity_title', '',array('placeholder' => 'Title', 'class' => 'form-control')) }}
 							<span class="help-block">
 							@if($errors->has())
-                           		{{ $errors->first('module_slug', '<li style="color: red;">:message</li>') }}
+                           		{{ $errors->first('activity_title', '<li style="color: red;">:message</li>') }}
                            	@endif
 						</span>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Description <span style="color: red;">*</span></label>
+						<label class="control-label col-md-3">Type</label>
 						<div class="col-md-9">
-							{{ Form::textarea('description', '',array('placeholder' => 'Please input a module description here...', 'class' => 'form-control')) }}
+							<select class="form-control" name="activity_type" id="activity_type">
+								<option value="0">From module review</option>
+								<option value="1">Not from module review</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Shortcode <span style="color: red;">*</span></label>
+						<div class="col-md-9">
+							{{ Form::text('shortcode', '',array('placeholder' => 'Shortcode', 'class' => 'form-control')) }}
 							<span class="help-block">
 							@if($errors->has())
-                           		{{ $errors->first('description', '<li style="color: red;">:message</li>') }}
+                           		{{ $errors->first('shortcode', '<li style="color: red;">:message</li>') }}
                            	@endif
 						</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Screenshot <span style="color: red;">*</span></label>
+						<div class="col-md-9">
+							{{ Form::file('screenshot', '', array('id' => 'file', 'class' => 'form-control', 'id' => 'exampleInputFile1', 'accept' => 'image/jpeg,image/png,image/gif',)) }}
 						</div>
 					</div>
 				</div>
@@ -84,7 +99,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="col-md-offset-3 col-md-9">
-								{{ Form::submit('Add Module', array('class' => 'btn green', 'name' => 'add_module')) }}
+								{{ Form::submit('Add Activity', array('class' => 'btn green', 'name' => 'add_activity')) }}
 							</div>
 						</div>
 					</div>
