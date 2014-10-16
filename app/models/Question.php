@@ -31,19 +31,47 @@ class Question extends Eloquent {
 		$question->save();
 
 		$choices = $data['choices'];
+		$images = $data['images'];
 		$ctr = 0;
-
-		foreach($choices as $choice)
+		
+		if($images != null)
 		{
-			$_choice = new Choice;
-			$_choice->question_id = $question->id;
-			$_choice->choice = $choice;
-			$_choice->order = Choice::getOrder($ctr);
-			$_choice->save();
+			for($i = 0; $i < count($images); $i++)
+			{
+				if($images[$i] != null)
+				{
+					$destinationPath = public_path().'/assets/choice_images/';
+			        $filename = $destinationPath . $images[$i]->getClientOriginalName();
+					Image::make($images[$i]->getRealPath())->save($filename);
+					$name = $images[$i]->getClientOriginalName();
+				} 
+				else 
+				{
+					$name = '';
+				}
 
-			$ctr++;
+				$_choice = new Choice;
+				$_choice->image = $name;
+				$_choice->question_id = $question->id;
+				$_choice->choice = $choices[$i];
+				$_choice->order = Choice::getOrder($i);
+				$_choice->save();
+			}
+		} 
+		else
+		{
+			foreach($choices as $choice)
+			{
+				$_choice2 = new Choice;
+				$_choice2->question_id = $question->id;
+				$_choice2->choice = $choice;
+				$_choice2->order = Choice::getOrder($ctr);
+				$_choice2->save();
+
+				$ctr++;
+			}
 		}
-
+			
 		return Question::find($question->id);
 	}
 
@@ -61,13 +89,14 @@ class Question extends Eloquent {
 
 		for($i = 0; $i < count($choices); $i++)
 		{
-			if($images != null)
+			if($images[$i] != null)
 			{
 			    $destinationPath = public_path().'/assets/choice_images/';
 		        $filename = $destinationPath . $images[$i]->getClientOriginalName();
 				Image::make($images[$i]->getRealPath())->save($filename);
 				$name = $images[$i]->getClientOriginalName();
-			} else 
+			} 
+			else 
 			{
 				$name = '';
 			}

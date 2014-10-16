@@ -26,7 +26,7 @@
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
 				<li class="start">
-					<a href="{{ URL::route('admin.index') }}">
+					<a href="#">
 						<i class="fa fa-home"></i>
 						<span class="title">
 							Dashboard
@@ -39,22 +39,36 @@
 					<a href="javascript:;">
 						<i class="fa fa-user"></i>
 						<span class="title">
-							Users
+							Account
 						</span>
-						<span class="arrow ">
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<i class="fa fa-user"></i>
+						<span class="title">
+							Managed students
+						</span>
+						<span class="arrow">
 						</span>
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="{{ URL::route('admin.users') }}">
+							<a href="#">
 								<i class="fa fa-list"></i>
-								View list
+								View students
 							</a>
 						</li>
 						<li>
-							<a href="{{ URL::route('admin.users.create') }}">
+							<a href="#">
+								<i class="fa fa-list"></i>
+								View groups
+							</a>
+						</li>
+						<li>
+							<a href="#">
 								<i class="fa fa-plus"></i>
-								Add new user
+								Add new group
 							</a>
 						</li>
 					</ul>
@@ -65,36 +79,30 @@
 						<span class="title">
 							Modules
 						</span>
-						<span class="arrow">
+						<span class="arrow ">
 						</span>
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="{{ URL::route('admin.modules') }}">
+							<a href="#">
 								<i class="fa fa-list"></i>
 								View list
-							</a>
-						</li>
-						<li>
-							<a href="{{ URL::route('admin.modules.create') }}">
-								<i class="fa fa-plus"></i>
-								Add new module
 							</a>
 						</li>
 					</ul>
 				</li>
-				<!--<li>
+				<li>
 					<a href="javascript:;">
-						<i class="fa fa-question-circle"></i>
+						<i class="fa fa-list-alt"></i>
 						<span class="title">
-							Questions
+							Cummulative Test
 						</span>
 						<span class="arrow ">
 						</span>
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="{{ URL::route('admin.questions') }}">
+							<a href="#">
 								<i class="fa fa-list"></i>
 								View list
 							</a>
@@ -102,16 +110,16 @@
 						<li>
 							<a href="#">
 								<i class="fa fa-plus"></i>
-								Add new question
+								Add test
 							</a>
 						</li>
 					</ul>
-				</li>-->
-				<!--<li>
+				</li>
+				<li>
 					<a href="javascript:;">
 						<i class="fa fa-list-alt"></i>
 						<span class="title">
-							Exercises
+							Student Results
 						</span>
 						<span class="arrow ">
 						</span>
@@ -119,24 +127,6 @@
 					<ul class="sub-menu">
 						<li>
 							<a href="#">
-								<i class="fa fa-list"></i>
-								View list
-							</a>
-						</li>
-					</ul>
-				</li>-->
-				<li>
-					<a href="javascript:;">
-						<i class="fa fa-list-alt"></i>
-						<span class="title">
-							Event Logs
-						</span>
-						<span class="arrow ">
-						</span>
-					</a>
-					<ul class="sub-menu">
-						<li>
-							<a href="{{ URL::route('admin.eventlogs') }}">
 								<i class="fa fa-list"></i>
 								View list
 							</a>

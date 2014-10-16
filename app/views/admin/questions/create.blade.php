@@ -78,13 +78,11 @@
 					</div>
 					<div class="question_type_2">
 						<div class="form-group">
-							<label class="control-label col-md-3">Image for Choice 1</label>
+							<label class="control-label col-md-3">Choice Image 1</label>
 							<div class="col-md-9">
-								{{ Form::text('choice_images[]', '', array('placeholder' => 'Image for Choice 1 - A', 'class' => 'form-control')) }}
+								{{ Form::file('choice_images[]', '', array('id' => 'file', 'class' => 'form-control', 'id' => 'exampleInputFile1', 'accept' => 'image/jpeg,image/png,image/gif',)) }}
 								<span class="help-block">
-									@if($errors->has())
-		                           		{{ $errors->first('choice_image_1', '<li style="color: red;">:message</li>') }}
-		                           	@endif
+									(upload a new choice image)
 								</span>
 							</div>
 						</div>
@@ -100,11 +98,11 @@
 					</div>
 					<div class="question_type_2">
 						<div class="form-group">
-							<label class="control-label col-md-3">Image for Choice 2</label>
+							<label class="control-label col-md-3">Choice Image 2</label>
 							<div class="col-md-9">
-								{{ Form::text('choice_images[]', '', array('placeholder' => 'Image for Choice 2 - B', 'class' => 'form-control')) }}
+								{{ Form::file('choice_images[]', '', array('id' => 'file', 'class' => 'form-control', 'id' => 'exampleInputFile1', 'accept' => 'image/jpeg,image/png,image/gif',)) }}
 								<span class="help-block">
-
+									(upload a new choice image)
 								</span>
 							</div>
 						</div>
@@ -120,11 +118,11 @@
 					</div>
 					<div class="question_type_2">
 						<div class="form-group">
-							<label class="control-label col-md-3">Image for Choice 3</label>
+							<label class="control-label col-md-3">Choice Image 3</label>
 							<div class="col-md-9">
-								{{ Form::text('choice_images[]', '', array('placeholder' => 'Image for Choice 3 - B', 'class' => 'form-control')) }}
+								{{ Form::file('choice_images[]', '', array('id' => 'file', 'class' => 'form-control', 'id' => 'exampleInputFile1', 'accept' => 'image/jpeg,image/png,image/gif',)) }}
 								<span class="help-block">
-
+									(upload a new choice image)
 								</span>
 							</div>
 						</div>
@@ -142,11 +140,11 @@
 							</div>	
 							<div class="question_type_2">
 								<div class="form-group">
-									<label class="control-label col-md-3">Image for Choice 4</label>
+									<label class="control-label col-md-3">Choice Image 4</label>
 									<div class="col-md-9">
-										{{ Form::text('choice_images[]', '', array('placeholder' => 'Image for Choice 4 - B', 'class' => 'form-control')) }}
+										{{ Form::file('choice_images[]', '', array('id' => 'file', 'class' => 'form-control', 'id' => 'exampleInputFile1', 'accept' => 'image/jpeg,image/png,image/gif',)) }}
 										<span class="help-block">
-
+											(upload a new choice image)
 										</span>
 									</div>
 								</div>
@@ -212,7 +210,7 @@
 	         		$('#addScnt').css('display', 'inline-block');
 			    	$('#addScnt2').css('display', 'none');
 			        $('#addScnt').live('click', function() {
-			                $('<div class="choices_form"><div class="form-group"><label class="control-label col-md-3">Choice '+ i +'</label><div class="col-md-9"><input type="text" class="form-control" name="choices[]" value="" placeholder="Choice '+ i +'" /><span class="help-block"></span></div></div><div class="form-group"><label class="control-label col-md-3">Choice '+ i +'</label><div class="col-md-9"><input type="text" class="form-control" name="choice_images[]" value="" placeholder="Choice Images'+ i +'" /><span class="help-block"><a href="#" id="remScnt">Remove</a></span></div></div></div>').appendTo(scntDiv);
+			                $('<div class="choices_form"><div class="form-group"><label class="control-label col-md-3">Choice '+ i +'</label><div class="col-md-9"><input type="text" class="form-control" name="choices[]" value="" placeholder="Choice '+ i +'" /><span class="help-block"></span></div></div><div class="form-group"><label class="control-label col-md-3">Choice '+ i +'</label><div class="col-md-9"><input type="file" class="form-control" name="choice_images[]" value="" id="exampleInputFile1" accept="image/jpeg,image/png,image/gif" /><span class="help-block"><a href="#" id="remScnt">Remove</a></span></div></div></div>').appendTo(scntDiv);
 			                i++;
 			                return false;
 			        });

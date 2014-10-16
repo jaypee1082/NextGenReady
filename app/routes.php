@@ -60,8 +60,6 @@ Route::resource('parent', 'ParentsController');
 */
 Route::resource('admin', 'AdminController');
 
-/* -- Administrator User Routes -- */
-
 Route::get('admin/users/list', array('as' => 'admin.users', 'uses' => 'AdminController@getUsersList'));
 Route::get('admin/users/create', array('as' => 'admin.users.create', 'uses' => 'AdminController@createUser'));
 Route::post('admin/users', array('as' => 'admin.users.store', 'uses' => 'AdminController@storeUser'));

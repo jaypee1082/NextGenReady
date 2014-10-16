@@ -415,7 +415,8 @@ class AdminController extends BaseController {
 				'question' => Input::get('question'),
 				'module_id' => $module->id,
 				'choices' => Input::get('choices'),
-				'answer' => Input::get('answer')
+				'answer' => Input::get('answer'),
+				'images' => Input::file('choice_images')
 				);
 			
 			
@@ -467,7 +468,8 @@ class AdminController extends BaseController {
 			return Redirect::back()->withErrors($validation);
 		}
 		else
-		{			
+		{	
+
 			$data = array(
 				'question' => Input::get('question'),
 				'answer' => Input::get('answer'),
